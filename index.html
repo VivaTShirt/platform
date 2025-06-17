@@ -1,51 +1,119 @@
 <!doctype html>
-<html>
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
+  <body class="bg-white">
 
-    <header class="w-[100%] h-[80px] bg-[#B78BC8] flex items-center p-5 justify-between">
-
+    <!-- HEADER -->
+    <header class="w-full h-[80px] bg-[#B78BC8] flex items-center p-5 justify-between">
       <!-- parte esquerda -->
-      <div class="">
-        <img class="w-[50px] md:w-[65px]" src="image/logo.svg" alt="Logo VivaTshirt">
+      <div>
+        <img class="w-[50px] md:w-[65px]" src="image/logo.svg" alt="Logo VivaTshirt" />
       </div>
 
       <!-- parte direita -->
       <div class="flex-row flex items-center gap-[15px]">
-
         <div class="p-3 bg-white rounded-[30px]">
-          <input type="text" name="" id="">
+          <input type="text" class="outline-none bg-transparent" placeholder="Buscar..." />
         </div>
-        
         <div>
-          <img class="w-[25px] md:w-[35px]" src="image/Search.svg" alt="Lupa" srcset="">
+          <img class="w-[25px] md:w-[35px]" src="image/Search.svg" alt="Lupa" />
         </div>
-        
-        
         <a href="">
-          <img class="w-[25px] md:w-[35px]" src="image/Shopping Cart.svg" alt="Carrinho" srcset="">
+          <img class="w-[25px] md:w-[35px]" src="image/Shopping Cart.svg" alt="Carrinho" />
         </a>
-        
         <a href="">
-          <img class="w-[25px] md:w-[35px]" src="image/Test Account.svg" alt="Perfil" srcset="">
+          <img class="w-[25px] md:w-[35px]" src="image/Test Account.svg" alt="Perfil" />
         </a>
-        
       </div>
-      
-
     </header>
 
+    <!-- MAIN COM BANNER -->
     <main>
+
+      <!-- BANNER DE NOVIDADES -->
+      <section class="bg-[#B78BC8] text-white">
+        <div class="max-w-7xl mx-auto px-35 flex flex-col md:flex-row items-center justify-between gap-10">
+          
+          <!-- Lado esquerdo: texto e redes sociais -->
+          <div class="flex flex-col gap-20 max-w-md">
+
+            <!-- Título -->
+            <div>
+              <h2 class="text-white text-4xl">Confira nossas</h2>
+              <h1 class="text-6xl font-semibold text-white">Novidades!</h1>
+            </div>
+
+            <!-- Redes Sociais -->
+            <div class="flex flex-col gap-1">
+              <p class="text-white text-xl">Conheça nossas redes sociais</p>
+              <div class="flex space-x-2">
+                <img src="image/Facebook.svg" alt="Facebook" class="w-10 h-10">
+                <img src="image/Instagram.svg" alt="Instagram" class="w-10 h-10">
+                <img src="image/WhatsApp.svg" alt="WhatsApp" class="w-10 h-10">
+              </div>
+            </div>
+          </div>
+
+          <!-- Lado direito: imagens das modelos -->
+          <div class="flex items-center justify-center gap-6">
+            <img src="image/modelo1.svg" alt="Modelo 1" class="h-[400px] object-contain">
+            <img src="image/modelo2.svg" alt="Modelo 2" class="h-[400px] object-contain">
+          </div>
+
+        </div>
+      </section>
+      <section>
+         <div class="relative w-full max-w-4xl mx-auto mt-10 overflow-hidden">
+    <!-- Slides -->
+    <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
+      <img src="" class="w-full flex-shrink-0" />
+      <img src="https://via.placeholder.com/800x400/9370DB/ffffff?text=Slide+2" class="w-full flex-shrink-0" />
+      <img src="https://via.placeholder.com/800x400/40E0D0/000000?text=Slide+3" class="w-full flex-shrink-0" />
+    </div>
+
+    <!-- Botões -->
+    <button onclick="prevSlide()" class="absolute top-1/2 left-4 -translate-y-1/2 bg-white rounded-full p-2 shadow">
+      ⬅️
+    </button>
+    <button onclick="nextSlide()" class="absolute top-1/2 right-4 -translate-y-1/2 bg-white rounded-full p-2 shadow">
+      ➡️
+    </button>
+  </div>
+
+  <script>
+    const carousel = document.getElementById('carousel');
+    const slides = carousel.children;
+    let currentIndex = 0;
+
+    function updateCarousel() {
+      const slideWidth = slides[0].offsetWidth;
+      carousel.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateCarousel();
+    }
+
+    // Responsivo: atualiza ao redimensionar
+    window.addEventListener('resize', updateCarousel);
+  </script>
+      </section>
 
     </main>
 
+    <!-- FOOTER -->
     <footer>
-
     </footer>
-
+<script src="js/index.js"></script>
   </body>
 </html>
