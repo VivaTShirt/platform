@@ -167,60 +167,34 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-[#0b090d] text-white py-12 mt-5">
-      <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-
-        <div class="md:col-span-1">
-          <h3 class="text-[#9875b7] text-2xl font-bold mb-4">VivaTshirt</h3>
-          <p class="text-[#ceb8df] text-sm leading-relaxed">
-            Sua loja online de camisetas que combinam estilo e conforto. Viva cada momento com uma VivaTshirt!
-          </p>
-        </div>
-
+    <footer class="bg-[#0b090d] text-white py-8 mt-5">
+      <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+        <!-- Nome da empresa -->
         <div>
-          <h4 class="text-[#9875b7] text-lg font-semibold mb-4">Navegação</h4>
-          <ul class="space-y-2">
-            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Início</a></li>
-            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Produtos</a></li>
-            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Promoções</a></li>
-            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Blog</a></li>
-          </ul>
+          <h3 class="text-[#9875b7] text-2xl font-bold">VivaTshirt</h3>
         </div>
-
-        <div>
-          <h4 class="text-[#9875b7] text-lg font-semibold mb-4">Ajuda</h4>
-          <ul class="space-y-2">
-            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Central de Ajuda</a></li>
-            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Envio e Entregas</a></li>
-            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Trocas e Devoluções</a></li>
-            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Contato</a></li>
-          </ul>
+        <!-- Navegação simples -->
+        <ul class="flex flex-col md:flex-row gap-4 text-[#ceb8df] text-sm">
+          <li><a href="#" class="hover:text-[#9875b7] transition-colors">FAQ</a></li>
+          <li><a href="#" class="hover:text-[#9875b7] transition-colors">Contato</a></li>
+          <li><a href="#" class="hover:text-[#9875b7] transition-colors">Sobre</a></li>
+        </ul>
+        <!-- Redes sociais -->
+        <div class="flex space-x-4">
+          <a href="#" aria-label="Facebook" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+            <img src="image/Facebook.svg" alt="Facebook" class="w-6 h-6">
+          </a>
+          <a href="#" aria-label="Instagram" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+            <img src="image/Instagram.svg" alt="Instagram" class="w-6 h-6">
+          </a>
+          <a href="#" aria-label="WhatsApp" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+            <img src="image/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6">
+          </a>
         </div>
-
-        <div>
-          <h4 class="text-[#9875b7] text-lg font-semibold mb-4">Siga-nos</h4>
-          <div class="flex space-x-4 mb-6">
-            <a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200" aria-label="Facebook">
-              <img src="image/Facebook.svg" alt="Facebook" class="w-5 h-5 lg:w-10 lg:h-10">
-            </a>
-            <a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200" aria-label="Instagram">
-              <img src="image/Instagram.svg" alt="Instagram" class="w-5 h-5 lg:w-10 lg:h-10">
-            <a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200" aria-label="Twitter">
-              <img src="image/WhatsApp.svg" alt="WhatsApp" class="w-5 h-5 lg:w-10 lg:h-10">            </a>
-            </a>
-          </div>
-        </div>
-
       </div>
-
-      <div class="border-t border-[#9875b7] mt-10 pt-6 text-center text-[#ceb8df] text-sm">
-        <p>&copy; <span id="current-year"></span> VivaTshirt. Todos os direitos reservados.</p>
-        <p class="mt-2">
-          <a href="#" class="hover:text-[#9875b7] transition-colors duration-200">Política de Privacidade</a> |
-          <a href="#" class="hover:text-[#9875b7] transition-colors duration-200">Termos de Serviço</a>
-        </p>
+      <div class="mt-6 text-center text-[#ceb8df] text-xs">
+        &copy; <span id="current-year"></span> VivaTshirt. Todos os direitos reservados.
       </div>
-
     </footer>
 
     <script src="js/index.js"></script>
