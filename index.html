@@ -4,29 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-white">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 
-    <!-- HEADER -->
-    <header class="w-full h-[80px] bg-[#B78BC8] flex items-center p-5 justify-between">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <style>
+      body{
+        font-family: "Inter", sans-serif !important
+      }
+      .flickity-button {
+        background: transparent;
+      }
+    </style>
+  </head>
+
+  <body class="bg-white">
+  <!-- HEADER -->
+    <header class="w-full h-[80px] bg-[#B78BC8] flex items-center p-[5px] lg:p-5 justify-between">
       <!-- parte esquerda -->
       <div>
-        <img class="w-[50px] md:w-[65px]" src="image/logo.svg" alt="Logo VivaTshirt" />
+        <img class="w-[50px] lg:w-[65px]" src="image/logo.svg" alt="Logo VivaTshirt" />
       </div>
 
       <!-- parte direita -->
       <div class="flex-row flex items-center gap-[15px]">
-        <div class="p-3 bg-white rounded-[30px]">
+
+        <div id="searchBar" class="p-2 bg-white rounded-[30px] transition-opacity duration-300 opacity-0">
           <input type="text" class="outline-none bg-transparent" placeholder="Buscar..." />
         </div>
-        <div>
-          <img class="w-[25px] md:w-[35px]" src="image/Search.svg" alt="Lupa" />
+
+        <div id="toggleSearchBar" class="cursor-pointer">
+          <img class="w-[25px] lg:w-[35px]" src="image/Search.svg" alt="Lupa" />
         </div>
+
         <a href="">
-          <img class="w-[25px] md:w-[35px]" src="image/Shopping Cart.svg" alt="Carrinho" />
+          <img class="w-[25px] lg:w-[35px]" src="image/Shopping Cart.svg" alt="Carrinho" />
         </a>
         <a href="">
-          <img class="w-[25px] md:w-[35px]" src="image/Test Account.svg" alt="Perfil" />
+          <img class="w-[25px] lg:w-[35px]" src="image/Test Account.svg" alt="Perfil" />
         </a>
       </div>
     </header>
@@ -36,84 +52,179 @@
 
       <!-- BANNER DE NOVIDADES -->
       <section class="bg-[#B78BC8] text-white">
-        <div class="max-w-7xl mx-auto px-35 flex flex-col md:flex-row items-center justify-between gap-10">
+
+        <div class="max-w-7xl mx-auto px-35 flex flex-col lg:flex-row items-center justify-between gap-10">
           
           <!-- Lado esquerdo: texto e redes sociais -->
-          <div class="flex flex-col gap-20 max-w-md">
+          <div class="flex flex-col gap-5 lg:gap-20 max-w-lg">
 
             <!-- Título -->
             <div>
-              <h2 class="text-white text-4xl">Confira nossas</h2>
-              <h1 class="text-6xl font-semibold text-white">Novidades!</h1>
+              <h2 class="text-white text-2xl lg:text-4xl">Confira nossas</h2>
+              <h1 class="text-4xl lg:text-6xl font-semibold text-white">Novidades!</h1>
             </div>
 
             <!-- Redes Sociais -->
             <div class="flex flex-col gap-1">
               <p class="text-white text-xl">Conheça nossas redes sociais</p>
               <div class="flex space-x-2">
-                <img src="image/Facebook.svg" alt="Facebook" class="w-10 h-10">
-                <img src="image/Instagram.svg" alt="Instagram" class="w-10 h-10">
-                <img src="image/WhatsApp.svg" alt="WhatsApp" class="w-10 h-10">
+                <img src="image/Facebook.svg" alt="Facebook" class="w-5 h-5 lg:w-10 lg:h-10">
+                <img src="image/Instagram.svg" alt="Instagram" class="w-5 h-5 lg:w-10 lg:h-10">
+                <img src="image/WhatsApp.svg" alt="WhatsApp" class="w-5 h-5 lg:w-10 lg:h-10">
               </div>
             </div>
           </div>
 
           <!-- Lado direito: imagens das modelos -->
           <div class="flex items-center justify-center gap-6">
-            <img src="image/modelo1.svg" alt="Modelo 1" class="h-[400px] object-contain">
-            <img src="image/modelo2.svg" alt="Modelo 2" class="h-[400px] object-contain">
+            <img src="image/modelo1.svg" alt="Modelo 1" class="h-[300px] lg:h-[400px] object-contain">
+            <img src="image/modelo2.svg" alt="Modelo 2" class="h-[400px] object-contain hidden lg:block">
           </div>
 
         </div>
       </section>
-      <section>
-         <div class="relative w-full max-w-4xl mx-auto mt-10 overflow-hidden">
-    <!-- Slides -->
-    <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
-      <img src="" class="w-full flex-shrink-0" />
-      <img src="https://via.placeholder.com/800x400/9370DB/ffffff?text=Slide+2" class="w-full flex-shrink-0" />
-      <img src="https://via.placeholder.com/800x400/40E0D0/000000?text=Slide+3" class="w-full flex-shrink-0" />
-    </div>
 
-    <!-- Botões -->
-    <button onclick="prevSlide()" class="absolute top-1/2 left-4 -translate-y-1/2 bg-white rounded-full p-2 shadow">
-      ⬅️
-    </button>
-    <button onclick="nextSlide()" class="absolute top-1/2 right-4 -translate-y-1/2 bg-white rounded-full p-2 shadow">
-      ➡️
-    </button>
-  </div>
+      <!-- SEÇÃO DE NOVIDADES -->
+      <section class="text-[#0b090d] m-[20px]">
+        <h2 class="text-4xl mb-[20px] font-medium">Novidades</h2>
 
-  <script>
-    const carousel = document.getElementById('carousel');
-    const slides = carousel.children;
-    let currentIndex = 0;
+        <div class="main-carousel">
 
-    function updateCarousel() {
-      const slideWidth = slides[0].offsetWidth;
-      carousel.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-    }
+          <div class="carousel-cell flex-shrink-0 m-3">
+            <div class="bg-[#b78bc8] rounded-[25px] overflow-hidden shadow-md transition-shadow duration-200">
+              <img src="image/modelo1.svg" alt="Camiseta Body Feminina" class="object-contain p-2 h-[200px] lg:h-[450px] w-[200px] lg:w-[335px]">
+            </div>
+            <div class="text-center font-medium mt-3">
+              <p class="text-gray-800 text-base leading-tight">Camiseta Body Feminina</p>
+              <p class="text-gray-900 text-lg font-semibold mt-1">R$ 80,99</p>
+            </div>
+          </div>
 
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % slides.length;
-      updateCarousel();
-    }
+          <div class="carousel-cell flex-shrink-0 m-3">
+            <div class="bg-[#b78bc8] rounded-[25px] overflow-hidden shadow-md transition-shadow duration-200">
+              <img src="image/modelo1.svg" alt="Camiseta Body Feminina" class="object-contain p-2 h-[200px] lg:h-[450px] w-[200px] lg:w-[335px]">
+            </div>
+            <div class="text-center font-medium mt-3">
+              <p class="text-gray-800 text-base leading-tight">Camiseta Body Feminina</p>
+              <p class="text-gray-900 text-lg font-semibold mt-1">R$ 80,99</p>
+            </div>
+          </div>
 
-    function prevSlide() {
-      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-      updateCarousel();
-    }
+          <div class="carousel-cell flex-shrink-0 m-3">
+            <div class="bg-[#b78bc8] rounded-[25px] overflow-hidden shadow-md transition-shadow duration-200">
+              <img src="image/modelo1.svg" alt="Camiseta Body Feminina" class="object-contain p-2 h-[200px] lg:h-[450px] w-[200px] lg:w-[335px]">
+            </div>
+            <div class="text-center font-medium mt-3">
+              <p class="text-gray-800 text-base leading-tight">Camiseta Body Feminina</p>
+              <p class="text-gray-900 text-lg font-semibold mt-1">R$ 80,99</p>
+            </div>
+          </div>
 
-    // Responsivo: atualiza ao redimensionar
-    window.addEventListener('resize', updateCarousel);
-  </script>
+          <div class="carousel-cell flex-shrink-0 m-3">
+            <div class="bg-[#b78bc8] rounded-[25px] overflow-hidden shadow-md transition-shadow duration-200">
+              <img src="image/modelo1.svg" alt="Camiseta Body Feminina" class="object-contain p-2 h-[200px] lg:h-[450px] w-[200px] lg:w-[335px]">
+            </div>
+            <div class="text-center font-medium mt-3">
+              <p class="text-gray-800 text-base leading-tight">Camiseta Body Feminina</p>
+              <p class="text-gray-900 text-lg font-semibold mt-1">R$ 80,99</p>
+            </div>
+          </div>
+
+          <div class="carousel-cell flex-shrink-0 m-3">
+            <div class="bg-[#b78bc8] rounded-[25px] overflow-hidden shadow-md transition-shadow duration-200">
+              <img src="image/modelo1.svg" alt="Camiseta Body Feminina" class="object-contain p-2 h-[200px] lg:h-[450px] w-[200px] lg:w-[335px]">
+            </div>
+            <div class="text-center font-medium mt-3">
+              <p class="text-gray-800 text-base leading-tight">Camiseta Body Feminina</p>
+              <p class="text-gray-900 text-lg font-semibold mt-1">R$ 80,99</p>
+            </div>
+          </div>
+
+          <div class="carousel-cell flex-shrink-0 m-3">
+            <div class="bg-[#b78bc8] rounded-[25px] overflow-hidden shadow-md transition-shadow duration-200">
+              <img src="image/modelo1.svg" alt="Camiseta Body Feminina" class="object-contain p-2 h-[200px] lg:h-[450px] w-[200px] lg:w-[335px]">
+            </div>
+            <div class="text-center font-medium mt-3">
+              <p class="text-gray-800 text-base leading-tight">Camiseta Body Feminina</p>
+              <p class="text-gray-900 text-lg font-semibold mt-1">R$ 80,99</p>
+            </div>
+          </div>
+
+          <div class="carousel-cell flex-shrink-0 m-3">
+            <div class="bg-[#b78bc8] rounded-[25px] overflow-hidden shadow-md transition-shadow duration-200">
+              <img src="image/modelo1.svg" alt="Camiseta Body Feminina" class="object-contain p-2 h-[200px] lg:h-[450px] w-[200px] lg:w-[335px]">
+            </div>
+            <div class="text-center font-medium mt-3">
+              <p class="text-gray-800 text-base leading-tight">Camiseta Body Feminina</p>
+              <p class="text-gray-900 text-lg font-semibold mt-1">R$ 80,99</p>
+            </div>
+          </div>
+          
+        </div>
+
       </section>
 
     </main>
 
     <!-- FOOTER -->
-    <footer>
+    <footer class="bg-[#0b090d] text-white py-12 mt-5">
+      <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+
+        <div class="md:col-span-1">
+          <h3 class="text-[#9875b7] text-2xl font-bold mb-4">VivaTshirt</h3>
+          <p class="text-[#ceb8df] text-sm leading-relaxed">
+            Sua loja online de camisetas que combinam estilo e conforto. Viva cada momento com uma VivaTshirt!
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-[#9875b7] text-lg font-semibold mb-4">Navegação</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Início</a></li>
+            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Produtos</a></li>
+            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Promoções</a></li>
+            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Blog</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-[#9875b7] text-lg font-semibold mb-4">Ajuda</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Central de Ajuda</a></li>
+            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Envio e Entregas</a></li>
+            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Trocas e Devoluções</a></li>
+            <li><a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200">Contato</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-[#9875b7] text-lg font-semibold mb-4">Siga-nos</h4>
+          <div class="flex space-x-4 mb-6">
+            <a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200" aria-label="Facebook">
+              <img src="image/Facebook.svg" alt="Facebook" class="w-5 h-5 lg:w-10 lg:h-10">
+            </a>
+            <a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200" aria-label="Instagram">
+              <img src="image/Instagram.svg" alt="Instagram" class="w-5 h-5 lg:w-10 lg:h-10">
+            <a href="#" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors duration-200" aria-label="Twitter">
+              <img src="image/WhatsApp.svg" alt="WhatsApp" class="w-5 h-5 lg:w-10 lg:h-10">            </a>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-[#9875b7] mt-10 pt-6 text-center text-[#ceb8df] text-sm">
+        <p>&copy; <span id="current-year"></span> VivaTshirt. Todos os direitos reservados.</p>
+        <p class="mt-2">
+          <a href="#" class="hover:text-[#9875b7] transition-colors duration-200">Política de Privacidade</a> |
+          <a href="#" class="hover:text-[#9875b7] transition-colors duration-200">Termos de Serviço</a>
+        </p>
+      </div>
+
     </footer>
-<script src="js/index.js"></script>
+
+    <script src="js/index.js"></script>
+    <script src="js/header.js"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
   </body>
 </html>

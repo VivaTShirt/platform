@@ -1,3 +1,26 @@
+document.addEventListener("DOMContentLoaded", () => {
+
+  let carrosel = document.querySelector('.main-carousel');
+
+    let options = {
+      contain: true,
+      draggable: true,
+      autoplay:1500,
+      wrapAround: true,
+      pageDots: false
+    };
+
+  if (window.innerWidth < 1024) {
+    options.prevNextButtons = false;
+  } else {
+    options.prevNextButtons = true;
+  }
+
+  let flkty = new Flickity(carrosel, options);
+
+})
+
+//solicitar produtos novidades...
 async function fetchProdutos() {
   try {
     const res = await fetch("https://mocki.io/v1/2b5a066b-ec12-4cc4-a474-cc2cb9182b52");
