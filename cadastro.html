@@ -1,22 +1,104 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h2>Cadastro</h2>
-      <form id="cadastroForm">
-        <input type="text" id="nome" placeholder="Nome completo" required />
-        <input type="email" id="email" placeholder="Email" required />
-        <input type="password" id="senha" placeholder="Senha" required />
-        <button type="submit">Cadastrar</button>
-      </form>
-      <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
+<html lang="pt-BR" class="bg-purple-100 min-h-screen flex items-center justify-center">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cadastro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <main class="bg-purple-100 w-full p-6 md:p-8 md:max-w-4xl md:rounded-lg md:flex md:gap-16 md:items-center">
+
+    <div class="hidden md:block bg-purple-400 rounded-lg overflow-hidden max-w-xs flex-shrink-0">
+      <img src="image/mulher_cadastro.png" alt="Mulher" class="w-full h-full object-cover" />
     </div>
 
-    <script src="js/cadastro.js"></script>
-  </body>
+    <section class="w-full md:flex-1">
+      <h1 class="text-center text-purple-500 text-2xl md:text-3xl font-semibold mb-6 md:mb-8">Cadastre-se</h1>
+      <form class="flex flex-col gap-4 w-full max-w-md mx-auto">
+        <input type="text" placeholder="Nome"
+          class="w-full md:w-[400px] p-3 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-400" />
+        <input type="email" placeholder="Email"
+          class="w-full md:w-[400px] p-3 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-400" />
+
+        <!-- Campo de Senha -->
+        <div class="relative w-full md:w-[400px]">
+          <input id="senha" type="password" placeholder="Senha"
+            class="p-3 rounded-md border border-transparent w-full pr-10 focus:outline-none focus:ring-2 focus:ring-purple-400" />
+          <button type="button" onclick="toggleSenha('senha', 'iconeSenha')"
+            class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600">
+            <svg id="iconeSenha" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Campo de Confirmar Senha -->
+        <div class="relative w-full md:w-[400px]">
+          <input id="confirmarSenha" type="password" placeholder="Confirmar senha"
+            class="p-3 rounded-md border border-transparent w-full pr-10 focus:outline-none focus:ring-2 focus:ring-purple-400" />
+          <button type="button" onclick="toggleSenha('confirmarSenha', 'iconeConfirmarSenha')"
+            class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600">
+            <svg id="iconeConfirmarSenha" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </button>
+        </div>
+
+        <label class="flex items-center gap-2 text-gray-400 text-sm">
+          <input type="checkbox" class="w-4 h-4 rounded border border-gray-300 focus:ring-2 focus:ring-purple-400" />
+          Lembrar Senha
+        </label>
+
+        <button type="submit"
+          class="mt-4 bg-purple-400 text-white py-2 rounded-md font-semibold hover:bg-purple-500 transition-colors w-full md:w-[400px]">
+          Cadastrar
+        </button>
+
+        <div class="flex items-center gap-2 text-sm">
+          <p class="text-gray-500">Já tem conta?</p>
+          <a href="/login.html" class="text-gray-400 hover:text-purple-500 transition-colors">
+            Entrar
+          </a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    function toggleSenha(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icone = document.getElementById(iconId);
+
+      if (input.type === "password") {
+        input.type = "text";
+        icone.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10a9.958 9.958 0 012.215-6M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M2 2l20 20" />
+        `;
+      } else {
+        input.type = "password";
+        icone.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        `;
+      }
+    }
+  </script>
+</body>
+
 </html>
