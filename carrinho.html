@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css" />
+  <title>Carrinho</title>
+</head>
+
+<body class="bg-gray-100">
+
+  <!-- HEADER -->
+    <header class="w-full h-[80px] bg-[#B78BC8] flex items-center p-[5px] lg:p-5 justify-between">
+      <!-- parte esquerda -->
+      <div>
+        <img class="w-[50px] lg:w-[65px]" src="image/logo.svg" alt="Logo VivaTshirt" />
+      </div>
+
+      <!-- parte direita -->
+      <div class="flex-row flex items-center gap-[15px]">
+
+        <div id="searchBar" class="p-2 bg-white rounded-[30px] transition-opacity duration-300 opacity-0">
+          <input type="text" class="outline-none bg-transparent" placeholder="Buscar..." />
+        </div>
+
+        <div id="toggleSearchBar" class="cursor-pointer">
+          <img class="w-[25px] lg:w-[35px]" src="image/Search.svg" alt="Lupa" />
+        </div>
+
+        <a href="">
+          <img class="w-[25px] lg:w-[35px]" src="image/Shopping Cart.svg" alt="Carrinho" />
+        </a>
+        <a href="/produto.html">
+          <img class="w-[25px] lg:w-[35px]" src="image/Test Account.svg" alt="Perfil" />
+        </a>
+      </div>
+    </header>
+
+  <main class="px-4 py-6">
+    <h1 class="text-xl font-bold text-gray-800 mb-4">Carrinho de compras</h1>
+
+    <!-- PRODUTO -->
+    <div class="bg-white p-4 rounded-lg shadow-md flex flex-col lg:flex-row gap-6">
+
+      <!-- IMAGEM E DETALHES -->
+      <div class="flex flex-col sm:flex-row gap-4 flex-1">
+        <img src="image/modelo1.svg" alt="Camiseta Body Feminina" class="w-full sm:w-32 h-auto object-contain" />
+
+        <div>
+          <h2 class="font-semibold text-lg text-gray-700">Camiseta Body Feminina</h2>
+          <p class="text-green-600 text-sm mt-1">Em estoque</p>
+
+          <p class="text-sm text-gray-600 mt-4">Descrição do produto:</p>
+          <p class="text-sm text-gray-500 mt-1">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis inventore voluptatum recusandae ipsam
+            optio obcaecati repudiandae ad quia, vel amet incidunt suscipit fuga, est dignissimos ratione maxime quae
+            cumque vitae.
+          </p>
+
+          <div class="flex items-center gap-3 mt-4 text-sm text-purple-500">
+            <button class="hover:underline">Excluir</button>
+            <span>|</span>
+            <button class="hover:underline">Compartilhar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PREÇO E QUANTIDADE -->
+      <div class="flex flex-col items-end justify-between">
+        <p class="text-lg font-semibold text-gray-800">R$80,99</p>
+
+        <div class="flex items-center border rounded-full mt-4">
+          <button id="btn-diminuir"
+            class="px-3 text-lg font-bold text-purple-500 hover:text-purple-700">−</button>
+          <span id="quantidade" class="px-3 font-medium text-gray-700">1</span>
+          <button id="btn-aumentar"
+            class="px-3 text-lg font-bold text-purple-500 hover:text-purple-700">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBTOTAL -->
+    <div
+      class="mt-6 flex flex-col gap-4 lg:flex-row lg:justify-between items-center bg-white p-4 rounded-lg shadow-md">
+      <p class="text-base font-medium text-gray-800">
+        Subtotal (<span id="quantidade-subtotal">1</span> produto):
+        <span class="font-bold" id="subtotal">R$ 80,99</span>
+      </p>
+      <button
+        class="bg-[#B78BC8] hover:bg-[#a164ba] text-white font-semibold py-2 px-6 rounded transition-colors">
+        Fechar pedido
+      </button>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#0b090d] text-white py-8 mt-8">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div><h3 class="text-[#9875b7] text-xl font-bold">VivaTshirt</h3></div>
+
+      <ul class="flex flex-col md:flex-row gap-4 text-[#ceb8df] text-sm text-center">
+        <li><a href="#" class="hover:text-[#9875b7] transition-colors">FAQ</a></li>
+        <li><a href="#" class="hover:text-[#9875b7] transition-colors">Contato</a></li>
+        <li><a href="#" class="hover:text-[#9875b7] transition-colors">Sobre</a></li>
+      </ul>
+
+      <div class="flex gap-4">
+        <a href="#"><img src="image/Facebook.svg" alt="Facebook" class="w-6 h-6" /></a>
+        <a href="#"><img src="image/Instagram.svg" alt="Instagram" class="w-6 h-6" /></a>
+        <a href="#"><img src="image/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6" /></a>
+      </div>
+    </div>
+    <div class="mt-4 text-center text-[#ceb8df] text-xs">
+      &copy; <span id="current-year"></span> VivaTshirt. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script src="js/header.js"></script>
+  <script>
+    const precoUnitario = 80.99;
+    const quantidadeEl = document.getElementById("quantidade");
+    const subtotalEl = document.getElementById("subtotal");
+    const qtdSubtotalEl = document.getElementById("quantidade-subtotal");
+
+    const btnMais = document.getElementById("btn-aumentar");
+    const btnMenos = document.getElementById("btn-diminuir");
+
+    let quantidade = 1;
+
+    function atualizarValores() {
+      quantidadeEl.textContent = quantidade;
+      qtdSubtotalEl.textContent = quantidade;
+      const total = (quantidade * precoUnitario).toFixed(2).replace('.', ',');
+      subtotalEl.textContent = `R$ ${total}`;
+    }
+
+    btnMais.addEventListener("click", () => {
+      quantidade++;
+      atualizarValores();
+    });
+
+    btnMenos.addEventListener("click", () => {
+      if (quantidade > 1) {
+        quantidade--;
+        atualizarValores();
+      }
+    });
+
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>
