@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil do Usuário</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            roxo: '#9875B7',
+            lilas: '#CEB8DF',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-lilas min-h-screen flex flex-col justify-between font-sans">
+
+  <!-- HEADER -->
+  <header class="w-full h-[80px] bg-[#B78BC8] flex items-center p-[5px] lg:p-5 justify-between">
+    <div>
+      <img class="w-[50px] lg:w-[65px]" src="image/logo.svg" alt="Logo VivaTshirt" />
+    </div>
+    <div class="flex-row flex items-center gap-[15px]">
+      <div id="searchBar" class="p-2 bg-white rounded-[30px] transition-opacity duration-300 opacity-0">
+        <input type="text" class="outline-none bg-transparent" placeholder="Buscar..." />
+      </div>
+      <div id="toggleSearchBar" class="cursor-pointer">
+        <img class="w-[25px] lg:w-[35px]" src="image/Search.svg" alt="Lupa" />
+      </div>
+      <a href="">
+        <img class="w-[25px] lg:w-[35px]" src="image/Shopping Cart.svg" alt="Carrinho" />
+      </a>
+      <a href="">
+        <img class="w-[25px] lg:w-[35px]" src="image/Test Account.svg" alt="Perfil" />
+      </a>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="flex-1 flex flex-col items-center">
+
+    <!-- Perfil do Usuário -->
+    <div class="bg-white rounded-2xl shadow-lg p-8 mt-10 w-11/12 md:w-2/3 lg:w-1/2 flex flex-col items-center">
+      <div class="w-32 h-32 bg-lilas rounded-full flex items-center justify-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-roxo" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A11.955 11.955 0 0112 15c2.197 0 4.243.636 5.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </div>
+      <h2 class="text-2xl font-semibold text-roxo mb-2">Nome do Usuário</h2>
+      <p class="text-gray-600 mb-4">usuario@email.com</p>
+      <!-- Botões de ação no perfil.html -->
+        <div class="flex space-x-4">
+        <button onclick="window.location.href='editarPerfil.html'" 
+            class="bg-roxo text-white px-4 py-2 rounded-full hover:bg-purple-800 transition">
+            Editar Perfil
+        </button>
+        
+        <button class="bg-lilas text-roxo px-4 py-2 rounded-full hover:bg-purple-300 transition">
+            Configurações
+        </button>
+        </div>
+
+    <!-- Seção de Pedidos Recentes -->
+    <section class="w-11/12 md:w-2/3 lg:w-1/2 mt-8 mb-8">
+      <h3 class="text-xl font-semibold text-roxo mb-4">Pedidos Recentes</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white rounded-xl shadow p-4 flex flex-col items-center">
+          <img src="https://via.placeholder.com/100" alt="Produto" class="rounded-lg mb-2">
+          <p class="text-gray-700 text-sm text-center">Produto Exemplo</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="w-full bg-[#0b090d] text-white py-8 mt-5">
+    <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div>
+        <h3 class="text-[#9875b7] text-2xl font-bold">VivaTshirt</h3>
+      </div>
+      <ul class="flex flex-col md:flex-row gap-4 text-[#ceb8df] text-sm">
+        <li><a href="#" class="hover:text-[#9875b7] transition-colors">FAQ</a></li>
+        <li><a href="#" class="hover:text-[#9875b7] transition-colors">Contato</a></li>
+        <li><a href="#" class="hover:text-[#9875b7] transition-colors">Sobre</a></li>
+      </ul>
+      <div class="flex space-x-4">
+        <a href="#"><img src="image/Facebook.svg" alt="Facebook" class="w-6 h-6"></a>
+        <a href="#"><img src="image/Instagram.svg" alt="Instagram" class="w-6 h-6"></a>
+        <a href="#"><img src="image/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6"></a>
+      </div>
+    </div>
+    <div class="mt-6 text-center text-[#ceb8df] text-xs">
+      &copy; <span id="current-year"></span> VivaTshirt. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
