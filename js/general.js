@@ -1,5 +1,5 @@
 //SERVER  
-const API_URL = "https://redesigned-engine-wqgq5rjxg49f59xv-3000.app.github.dev/v1";
+const API_URL = "http://localhost:3000/v1";
 
 // Função para fazer requisições ao servidor
 // rote: rota da API, method: método HTTP (GET, POST, etc.), body: corpo da requisição (opcional), bearerToken: token de autenticação (opcional)
@@ -9,6 +9,7 @@ async function requestToServer(rote, method, body = null, bearerToken = null) {
         headers: {
             "Content-Type": "application/json",
         },
+        credentials: "include"
     };
 
     if (body) {
