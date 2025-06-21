@@ -1,25 +1,31 @@
 //verificar se usuário google está querendo entrar
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const newGCustomer = urlParams.get("gStateSystemToken");
+  async function gUserHandleSignIn() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const newGCustomer = urlParams.get("gStateSystemToken");
 
-  if (newGCustomer !== null) {
-    
-    const response = await requestToServer("/customer/token/" + newGCustomer, "GET", null, null);
-
-    if (response?.error) {//caso tenha algum erro ele mostra o erro
-
-        console.error("Algum problema interno no servidor:" + response.error);
+      if (newGCustomer !== null) {
         
-    } else {//caso entre ele guarda os dados no localStorage e redireciona para o home
+        const response = await requestToServer("/customer/token/" + newGCustomer, "GET", null, null);
 
-      localStorage.setItem("user", JSON.stringify(response));
+        if (response?.error) {//caso tenha algum erro ele mostra o erro
 
-      window.location.href = "/"; 
-    }
+          console.error("Algum problema interno no servidor:" + response.error);
+          return;
 
+        }
+
+        //caso entre ele guarda os dados no localStorage e redireciona para o home
+
+        localStorage.setItem("user", JSON.stringify(response));
+
+        window.location.href = "/"; 
+        
+      }
   }
+
+  gUserHandleSignIn()
 
 });
 
@@ -41,6 +47,34 @@ document.addEventListener("DOMContentLoaded", function () {
     showAlertCard('success', 'Cadastro realizado com sucesso!', 'Agora você pode fazer login.', 3500);
   }
 
+    // Remove o parâmetro da URL sem recarregar a página
+  if (preRegistered) {
+    const url = new URL(window.location);
+    url.searchParams.delete("preRegistered");
+    window.history.replaceState({}, document.title, url.pathname + url.search);
+  }
+
+});
+
+//veiricar se o usuário acabou de tentar trocar senha
+document.addEventListener("DOMContentLoaded", function () {
+  
+  //se sim libera uma mensagem de sucesso
+  const urlParams = new URLSearchParams(window.location.search);
+  const preChangedPassword = urlParams.get("changedPassword");
+
+  if (preChangedPassword == "SUCCESS_PASSWORD_RESET") {
+    showAlertCard('success', 'Sua senha foi alterada com sucesso!', 'Faça o login com a nova senha.', 3500);
+  } else if (preChangedPassword == "ERR_FORBIDDEN_PASSWORD_RESET") {
+    showAlertCard('danger', 'Você não pode mudar sua senha agora.', 'Por favor, siga a orientação do sistema para mudar a senha de sua conta.', 3500);
+  }
+
+  // Remove o parâmetro da URL sem recarregar a página
+  if (preChangedPassword) {
+    const url = new URL(window.location);
+    url.searchParams.delete("changedPassword");
+    window.history.replaceState({}, document.title, url.pathname + url.search);
+  }
 });
 
 //enviar formulário de login
@@ -63,10 +97,11 @@ document.getElementById("submitFormToServer").addEventListener("submit", async (
 
   if (response?.error) {//caso tenha algum erro ele mostra o erro
 
-    showAlertCard('danger', 'Erro ao entrar', response.error, 3500);
+    showAlertCard('danger', response.error, '', 3500);
   } else if(response?.missing){//caso tenha algum campo faltando ele mostra o erro
 
-    showAlertCard('danger', 'Dados inválidos', response.missing[0].msg, 3500);
+      showAlertCard('danger', response.missing[0].msg ,'Dados inválidos', 3500);
+      return;
   }else {//caso entre ele guarda os dados no localStorage e redireciona para o home
 
     localStorage.setItem("user", JSON.stringify(response));

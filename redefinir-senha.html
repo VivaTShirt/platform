@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nova Senha</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="w-full h-[80px] bg-[#B78BC8] flex items-center p-[5px] lg:p-5 justify-between">
+    <div>
+      <a href="/login">
+        <img class="w-[50px] lg:w-[65px]" src="image/logo.svg" alt="Logo VivaTshirt" />
+      </a>
+    </div>
+  </header>
+
+  <!-- conteudo -->
+  <main class="bg-purple-100 w-full p-6">
+    <section class="min-h-screen flex items-center justify-center px-4 flex flex-col">
+      <h2 class="text-3xl font-semibold text-center text-[#B78BC8] mb-6">Nova Senha</h2>
+      <p class="text-gray-600 mb-4 text-center">Digite sua nova senha.</p>
+      <form id="submitFormToServer">
+        <input name="senha" type="password" placeholder="Nova senha" class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-[#B78BC8]" />
+        <input name="confirmarSenha" type="password" placeholder="Confirme a nova senha" class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-[#B78BC8]" />
+        <button type="submit" class="w-full bg-[#B78BC8] text-white py-3 rounded-lg hover:bg-[#a56bb8] transition-colors">Alterar Senha</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="js/general.js"></script>
+  <script src="js/redefinir-senha.js"></script>
+
+</body>
+
+</html>
