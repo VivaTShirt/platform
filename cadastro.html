@@ -9,6 +9,33 @@
 </head>
 
 <body>
+
+  <!-- card de alert de sucesso -->
+  <div id="successCard" class="fixed bottom-4 left-1/2 -translate-x-1/2 w-11/12 lg:w-[500px] bg-green-100 border border-green-300 text-green-800 p-4 rounded-lg shadow-md z-50 hidden">
+    <div class="flex items-center">
+      <svg class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <div>
+        <h3 class="font-semibold text-lg"><message id="titleSuccessCard"></message></h3>
+        <p><message id="descSuccessCard"></message></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- card de alert de erro -->
+  <div id="dangerCard" class="fixed bottom-4 left-1/2 -translate-x-1/2 w-11/12 lg:w-[500px] bg-red-100 border border-red-300 text-red-800 p-4 rounded-lg shadow-md z-50 hidden">
+    <div class="flex items-center">
+      <svg class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <div>
+        <h3 class="font-semibold text-lg"><message id="titleDangerCard"></message></h3>
+        <p><message id="descDangerCard"></message></p>
+      </div>
+    </div>
+  </div>
+
   <main class="bg-purple-100 w-full p-6 md:p-8 md:max-w-4xl md:rounded-lg md:flex md:gap-16 md:items-center">
 
     <div class="hidden md:block bg-purple-400 rounded-lg overflow-hidden max-w-xs flex-shrink-0">
@@ -17,15 +44,15 @@
 
     <section class="w-full md:flex-1">
       <h1 class="text-center text-purple-500 text-2xl md:text-3xl font-semibold mb-6 md:mb-8">Cadastre-se</h1>
-      <form class="flex flex-col gap-4 w-full max-w-md mx-auto">
-        <input type="text" placeholder="Nome"
+      <form id="submitFormToServer" class="flex flex-col gap-4 w-full max-w-md mx-auto">
+        <input name="nome" type="text" placeholder="Nome"
           class="w-full md:w-[400px] p-3 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-400" />
-        <input type="email" placeholder="Email"
+        <input name="email" type="email" placeholder="Email"
           class="w-full md:w-[400px] p-3 rounded-md border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-400" />
 
         <!-- Campo de Senha -->
         <div class="relative w-full md:w-[400px]">
-          <input id="senha" type="password" placeholder="Senha"
+          <input id="senha" name="senha" type="password" placeholder="Senha"
             class="p-3 rounded-md border border-transparent w-full pr-10 focus:outline-none focus:ring-2 focus:ring-purple-400" />
           <button type="button" onclick="toggleSenha('senha', 'iconeSenha')"
             class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600">
@@ -41,7 +68,7 @@
 
         <!-- Campo de Confirmar Senha -->
         <div class="relative w-full md:w-[400px]">
-          <input id="confirmarSenha" type="password" placeholder="Confirmar senha"
+          <input id="confirmarSenha" name="confirmarSenha" type="password" placeholder="Confirmar senha"
             class="p-3 rounded-md border border-transparent w-full pr-10 focus:outline-none focus:ring-2 focus:ring-purple-400" />
           <button type="button" onclick="toggleSenha('confirmarSenha', 'iconeConfirmarSenha')"
             class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600">
@@ -55,19 +82,14 @@
           </button>
         </div>
 
-        <label class="flex items-center gap-2 text-gray-400 text-sm">
-          <input type="checkbox" class="w-4 h-4 rounded border border-gray-300 focus:ring-2 focus:ring-purple-400" />
-          Lembrar Senha
-        </label>
-
-        <button type="submit"
+        <button id="buttonSendForm" type="submit"
           class="mt-4 bg-purple-400 text-white py-2 rounded-md font-semibold hover:bg-purple-500 transition-colors w-full md:w-[400px]">
           Cadastrar
         </button>
 
         <div class="flex items-center gap-2 text-sm">
           <p class="text-gray-500">Já tem conta?</p>
-          <a href="/login.html" class="text-gray-400 hover:text-purple-500 transition-colors">
+          <a href="/login" class="text-gray-400 hover:text-purple-500 transition-colors">
             Entrar
           </a>
         </div>
@@ -75,30 +97,8 @@
     </section>
   </main>
 
-  <script>
-    function toggleSenha(inputId, iconId) {
-      const input = document.getElementById(inputId);
-      const icone = document.getElementById(iconId);
-
-      if (input.type === "password") {
-        input.type = "text";
-        icone.innerHTML = `
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10a9.958 9.958 0 012.215-6M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M2 2l20 20" />
-        `;
-      } else {
-        input.type = "password";
-        icone.innerHTML = `
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-        `;
-      }
-    }
-  </script>
+  <script src="js/general.js"></script>
+  <script src="js/cadastro.js"></script>
 </body>
 
 </html>

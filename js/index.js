@@ -40,7 +40,7 @@ async function fetchProdutos() {
       `;
       div.addEventListener("click", () => {
         localStorage.setItem("produtoSelecionado", JSON.stringify(produto));
-        window.location.href = "produto.html";
+        window.location.href = "produto";
       });
       container.appendChild(div);
     });
