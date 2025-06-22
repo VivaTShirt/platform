@@ -100,8 +100,7 @@ document.getElementById("submitFormToServer").addEventListener("submit", async (
     showAlertCard('danger', response.error, '', 3500);
   } else if(response?.missing){//caso tenha algum campo faltando ele mostra o erro
 
-      showAlertCard('danger', response.missing[0].msg ,'Dados inválidos', 3500);
-      return;
+    showAlertCard('danger', response.missing[0].msg ,'Dados inválidos', 3500);
   }else {//caso entre ele guarda os dados no localStorage e redireciona para o home
 
     localStorage.setItem("user", JSON.stringify(response));

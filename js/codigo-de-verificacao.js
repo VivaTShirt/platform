@@ -15,6 +15,10 @@ document.getElementById("submitFormToServer").addEventListener("submit", async (
         showAlertCard('danger', response.error, 'Algo deu errado.', 3500);
         toggleLoading(false);
         return;
+    }else if(response?.missing){//caso tenha algum campo faltando ele mostra o erro
+
+        showAlertCard('danger', response.missing[0].msg ,'Dados inválidos', 3500);
+        return;
     }
 
     window.location.href = "/redefinir-senha?token=" + response.tokenable_id + "&code=" + response.token;

@@ -1,5 +1,5 @@
 //SERVER  
-const API_URL = "http://localhost:3000/v1";
+const API_URL = "https://c74a-152-243-252-149.ngrok-free.app/v1";
 
 // Função para fazer requisições ao servidor
 // rote: rota da API, method: método HTTP (GET, POST, etc.), body: corpo da requisição (opcional), bearerToken: token de autenticação (opcional)
@@ -197,4 +197,33 @@ function toggleLoading(show) {
       }, { once: true });
     }
   }
+}
+
+// funcão que adiciona produto ao carrinho
+function addProductToCart(product) {
+  const cartKey = 'cart_products';
+  // Busca o carrinho atual ou inicializa como array vazio
+  let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+  // Verifica se o produto já existe no carrinho
+  const existingIndex = cart.findIndex(item => item.id === product.id);
+
+  if (existingIndex !== -1) {
+    // Se já existe, soma a quantidade
+    cart[existingIndex].quantity += product.quantity;
+  } else {
+    // Se não existe, adiciona novo produto
+    cart.push(product);
+  }
+
+  // Salva o carrinho atualizado no localStorage
+  localStorage.setItem(cartKey, JSON.stringify(cart));
+}
+
+//função que retorna a quantidade de itens no carrinho
+function getCartTotalItems() {
+  const cartKey = 'cart_products';
+  const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+  // Soma todas as quantidades dos produtos no carrinho
+  return cart.reduce((total, item) => total + (item.quantity || 0), 0);
 }

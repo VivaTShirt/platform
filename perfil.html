@@ -52,8 +52,8 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A11.955 11.955 0 0112 15c2.197 0 4.243.636 5.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
       </div>
-      <h2 class="text-2xl font-semibold text-roxo mb-2">Nome do Usuário</h2>
-      <p class="text-gray-600 mb-4">usuario@email.com</p>
+      <h2 id="name" class="text-2xl font-semibold text-roxo mb-2">Nome do Usuário</h2>
+      <p id="email" class="text-gray-600 mb-4">usuario@email.com</p>
       <!-- Botões de ação no perfil.html -->
         <div class="flex space-x-4">
         <button onclick="window.location.href='editar-perfil.html'" 
@@ -101,9 +101,8 @@
     </div>
   </footer>
 
-  <script>
-    document.getElementById("current-year").textContent = new Date().getFullYear();
-  </script>
+  <script src="js/editar-perfil.js"></script>
+  <script src="js/general.js"></script>
 
 </body>
 </html>

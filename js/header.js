@@ -10,3 +10,5 @@ document.getElementById("toggleSearchBar").addEventListener("click", () => {
     }
 
 });
+
+//modal de carrinho
