@@ -1,0 +1,153 @@
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurações da Conta - VivaTshirt</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            roxo: '#9875B7',
+            lilas: '#CEB8DF',
+          }
+        }
+      }
+    }
+  </script>
+
+<body class="bg-lilas min-h-screen flex flex-col font-sans">
+
+  <!-- HEADER -->
+  <header class="w-full h-[80px] bg-[#B78BC8] flex items-center justify-center">
+    <h1 class="text-white text-2xl font-semibold">Configurações da Conta</h1>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="flex-1 flex items-center justify-center p-6">
+    <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
+      <h2 class="text-xl font-semibold text-roxo mb-6 text-center">Alterar Senha</h2>
+
+      <!-- Alterar senha -->
+      <div class="space-y-4">
+        <div>
+          <label class="block text-roxo font-medium mb-1">Senha Atual:</label>
+          <input type="password" id="senhaAtual" class="w-full border border-roxo rounded-md p-2" placeholder="Senha atual">
+        </div>
+        <div>
+          <label class="block text-roxo font-medium mb-1">Nova Senha:</label>
+          <input type="password" id="novaSenha" class="w-full border border-roxo rounded-md p-2" placeholder="Nova senha">
+        </div>
+        <div>
+          <label class="block text-roxo font-medium mb-1">Confirmar Nova Senha:</label>
+          <input type="password" id="confirmarSenha" class="w-full border border-roxo rounded-md p-2" placeholder="Confirme a nova senha">
+        </div>
+        <button onclick="alterarSenha()" class="w-full bg-roxo text-white py-2 rounded-full hover:bg-purple-800 transition">Salvar Alterações</button>
+      </div>
+
+      <!-- Apagar conta -->
+      <div class="mt-8 text-center">
+        <button onclick="abrirModalExcluir()" class="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-700 transition">Apagar Conta</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal de confirmação de exclusão -->
+  <div id="modalExcluir" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl p-6 w-80 text-center">
+      <h3 class="text-roxo text-xl font-bold mb-4">Deseja mesmo excluir a conta?</h3>
+      <div class="flex justify-center space-x-4">
+        <button onclick="confirmarExclusao()" class="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-700 transition">Sim</button>
+        <button onclick="fecharModalExcluir()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-400 transition">Não</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Alterar senha
+    function alterarSenha() {
+      const senhaAtual = document.getElementById('senhaAtual').value.trim();
+      const novaSenha = document.getElementById('novaSenha').value.trim();
+      const confirmarSenha = document.getElementById('confirmarSenha').value.trim();
+
+      const perfil = JSON.parse(localStorage.getItem("perfil"));
+
+      if (!perfil) {
+        alert("Nenhuma conta encontrada.");
+        return;
+      }
+
+      if (senhaAtual !== perfil.senha) {
+        alert("A senha atual está incorreta.");
+        return;
+      }
+
+      if (novaSenha.length < 4) {
+        alert("A nova senha deve ter pelo menos 4 caracteres.");
+        return;
+      }
+
+      if (novaSenha !== confirmarSenha) {
+        alert("A nova senha e a confirmação não coincidem.");
+        return;
+      }
+
+      // Atualiza a senha no localStorage
+      perfil.senha = novaSenha;
+      localStorage.setItem("perfil", JSON.stringify(perfil));
+      alert("Senha alterada com sucesso!");
+      window.location.href = "perfil.html"; // volta para o perfil
+    }
+
+    // Apagar conta - abrir modal
+    function abrirModalExcluir() {
+      document.getElementById("modalExcluir").classList.remove("hidden");
+    }
+
+    // Fechar modal
+    function fecharModalExcluir() {
+      document.getElementById("modalExcluir").classList.add("hidden");
+    }
+
+    // Confirmar exclusão
+    function confirmarExclusao() {
+      localStorage.removeItem("perfil");
+      alert("Conta excluída com sucesso.");
+      window.location.href = "index.html"; // ou a página inicial
+    }
+  </script>
+
+</body>
+</html>
+
+<!-- FOOTER -->
+    <footer class="bg-[#0b090d] text-white py-8 mt-5">
+      <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+        <!-- Nome da empresa -->
+        <div>
+          <h3 class="text-[#9875b7] text-2xl font-bold">VivaTshirt</h3>
+        </div>
+        <!-- Navegação simples -->
+        <ul class="flex flex-col md:flex-row gap-4 text-[#ceb8df] text-sm">
+          <li><a href="#" class="hover:text-[#9875b7] transition-colors">FAQ</a></li>
+          <li><a href="#" class="hover:text-[#9875b7] transition-colors">Contato</a></li>
+          <li><a href="#" class="hover:text-[#9875b7] transition-colors">Sobre</a></li>
+        </ul>
+        <!-- Redes sociais -->
+        <div class="flex space-x-4">
+          <a href="#" aria-label="Facebook" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+            <img src="image/Facebook.svg" alt="Facebook" class="w-6 h-6">
+          </a>
+          <a href="#" aria-label="Instagram" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+            <img src="image/Instagram.svg" alt="Instagram" class="w-6 h-6">
+          </a>
+          <a href="#" aria-label="WhatsApp" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+            <img src="image/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6">
+          </a>
+        </div>
+      </div>
+      <div class="mt-6 text-center text-[#ceb8df] text-xs">
+        &copy; <span id="current-year"></span> VivaTshirt. Todos os direitos reservados.
+      </div>
+    </footer>
