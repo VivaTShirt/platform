@@ -52,10 +52,10 @@ document.getElementById("submitFormToServer").addEventListener("submit", async f
 
     if (response?.error) {//caso tenha algum erro ele mostra o erro
 
-      showAlertCard('danger', 'Erro de cadastro', response.error, 3500);
+      showAlertCard('danger', response.error, '', 3500);
     } else if(response?.missing){//caso tenha algum campo faltando ele mostra o erro
 
-      showAlertCard('danger', 'Dados inválidos', response.missing[0].msg, 3500);
+      showAlertCard('danger', response.missing[0].msg ,'Dados inválidos', 3500);
     }else {//caso entre ele redireciona para o login
 
       window.location.href = "login?preRegistered=true";

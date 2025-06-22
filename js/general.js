@@ -3,7 +3,7 @@ const API_URL = "http://localhost:3000/v1";
 
 // Função para fazer requisições ao servidor
 // rote: rota da API, method: método HTTP (GET, POST, etc.), body: corpo da requisição (opcional), bearerToken: token de autenticação (opcional)
-async function requestToServer(rote, method, body = null, bearerToken = null) {
+async function requestToServer(rote, method, body = null, bearerToken = null) { 
     const options = {
         method: method,
         headers: {
@@ -46,10 +46,12 @@ async function requestToServer(rote, method, body = null, bearerToken = null) {
         });
 }
 
+//pega os dados do usuario no localstorage
 function getUserLocalData() {
     return JSON.stringify(localStorage.getItem("user"));
 }
 
+//função que verifica se ta logado
 async function verifyIfIsLogged() {
     if (localStorage.getItem("user") !== null) {
 
@@ -64,7 +66,7 @@ async function verifyIfIsLogged() {
         if (userServer.error) {
 
             window.location.href = "login";
-            showAlertCard('danger', 'Erro de autenticação', 'Sua sessão expirou ou o usuário não existe. Por favor, faça login novamente.', 3500);
+            showAlertCard('danger', 'Erro de autenticação', 'Usuário não existe. Por favor, faça login novamente.', 3500);
             return false;
 
         }
@@ -76,6 +78,7 @@ async function verifyIfIsLogged() {
     }
 }
 
+//função que redireciona se estiver logado
 function redirectIfLogged() {
     const user = localStorage.getItem("user");
     if (user !== null) {
@@ -88,6 +91,8 @@ function redirectIfLogged() {
 }
 
 //DOM
+
+//função que libera o card de alerta, aletType = danger / success
 function showAlertCard(alertType, title, description, duration) {
   // Define base classes for the alert container
   const baseAlertClasses = "fixed bottom-4 left-1/2 -translate-x-1/2 w-11/12 lg:w-[500px] p-4 rounded-lg shadow-md z-50";
@@ -143,12 +148,14 @@ function showAlertCard(alertType, title, description, duration) {
   // Set timeout to hide and remove the alert
   setTimeout(() => {
     alertDiv.style.opacity = '0'; // Start fade out
+    alertDiv.style.zIndex = '-1'; // Lower z-index to hide it behind other elements
     alertDiv.addEventListener('transitionend', () => {
       alertDiv.remove(); // Remove element after fade out
     }, { once: true }); // Ensure event listener is removed after first execution
   }, duration);
 }
 
+//função que libera a tela de login, true mostra, false esconde
 function toggleLoading(show) {
   const loadingId = 'app-loading-overlay';
   let loadingOverlay = document.getElementById(loadingId);
@@ -176,12 +183,14 @@ function toggleLoading(show) {
       // If it exists but was hidden, just show it
       loadingOverlay.style.display = 'flex';
       loadingOverlay.style.opacity = '1';
+      loadingOverlay.style.zIndex = '-1'; // Lower z-index to hide it behind other elements
     }
   } else {
     // If we need to hide the loading overlay and it exists
     if (loadingOverlay) {
       // Optional: Add a fade-out effect before removal
       loadingOverlay.style.opacity = '0';
+      loadingOverlay.style.zIndex = '-1'; // Lower z-index to hide it behind other elements
       loadingOverlay.addEventListener('transitionend', () => {
         loadingOverlay.style.display = 'none';
         loadingOverlay.remove(); // Remove element from DOM after fade out
