@@ -5,21 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil do Usuário</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            roxo: '#9875B7',
-            lilas: '#CEB8DF',
-          }
-        }
-      }
-    }
-  </script>
 </head>
 
-<body class="bg-lilas min-h-screen flex flex-col justify-between font-sans">
+<body class="min-h-screen flex flex-col justify-between font-sans">
 
   <!-- HEADER -->
   <header class="w-full h-[80px] bg-[#B78BC8] flex items-center p-[5px] lg:p-5 justify-between">
@@ -44,8 +32,9 @@
         <img class="w-[25px] lg:w-[35px]" src="image/Shopping Cart.svg" alt="Carrinho" />
       </div>
 
-      <a href="/perfil.html">
+      <a href="/perfil" class="flex flex-row items-center gap-2">
         <img class="w-[25px] lg:w-[35px]" src="image/Test Account.svg" alt="Perfil" />
+        <p id="userMeetings" class="text-white hidden"></p>
       </a>
 
     </div>
@@ -105,62 +94,147 @@
   <!-- CONTEÚDO PRINCIPAL -->
   <section class="flex-1 flex flex-col items-center w-full min-h-screen">
 
-    <!-- Perfil do Usuário -->
-    <div class="bg-white rounded-2xl shadow-lg p-8 mt-0 w-full md:w-4/3 flex flex-col  min-h-screen">
-     <div class="flex items-center gap-6 mb-4">
-  <div class="w-20 h-20 bg-lilas rounded-full flex items-center justify-center">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-roxo" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A11.955 11.955 0 0112 15c2.197 0 4.243.636 5.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
-    </svg>
-  </div>
-  <div>
-    <h2 id="nome" class="text-2xl font-semibold text-roxo mb-2"></h2>
-    <p id="email" class="text-gray-600 mb-4"></p>
-  </div>
-</div>
-      <!-- Botões de ação no perfil.html -->
-        <div class="flex space-x-4">
-        <button onclick="window.location.href='editar-perfil.html'" 
-            class="bg-roxo text-white px-4 py-2 rounded-full hover:bg-purple-800 transition">
-            Editar Perfil
-        </button>
-        
-        <button onclick="window.location.href='configuracoes.html'" class="bg-lilas text-roxo px-4 py-2 rounded-full hover:bg-purple-300 transition">
-            Configurações
-        </button>
-
-        <button onclick="logout()" 
-            class="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition">
-            Sair
-        </button>
-        <script>
-          function logout() {
-            localStorage.removeItem("user");
-            window.location.href = 'login.html';
-          }
-        </script>
+    <div class="m-10">
+      <!-- Perfil do Usuário -->
+      <div class="flex items-center gap-6 mb-4">
+        <div class="w-20 h-20">
+          <img id="userAvatar" src="image/user-account.png" alt="Avatar do Usuário">
         </div>
-
-    <!-- Seção de Pedidos Recentes -->
-    <section class="w-11/12 md:w-2/3 lg:w-1/2 mt-8 mb-8">
-      <h3 class="text-xl font-semibold text-roxo mb-4">Pedidos Recentes</h3>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center w-full">
-          <!-- <img src="https://via.placeholder.com/140" alt="Produto" class="rounded-lg mb-4 w-32 h-32"> -->
-          <p class="text-gray-700 text-base text-center font-medium">Produto Exemplo</p>
+        <div>
+          <h2 id="nome" class="text-2xl font-semibold text-[#9875B7] mb-2"></h2>
+          <p id="email" class="text-gray-600 mb-4"></p>
         </div>
-        <div class="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center w-full">
-          <!-- <img src="https://via.placeholder.com/140" alt="Produto" class="rounded-lg mb-4 w-32 h-32"> -->
-          <p class="text-gray-700 text-base text-center font-medium">Produto Exemplo</p>
-        </div>
-        <!-- Adicione mais pedidos aqui, se necessário -->
       </div>
+
+      <!-- Tabela de ações do perfil -->
+      <div class="w-full max-w-md">
+        <table class="w-full text-left border border-[#ceb8df] rounded-lg overflow-hidden">
+          <tbody>
+            <tr class="hover:bg-[#f3eaf7] transition cursor-pointer" onclick="window.location.href='editar-perfil'">
+              <td class="px-6 py-4 font-semibold text-[#9875B7]">Editar Perfil</td>
+            </tr>
+            <tr class="hover:bg-[#f3eaf7] transition cursor-pointer" onclick="window.location.href='configuracoes'">
+              <td class="px-6 py-4 font-semibold text-[#9875B7]">Configurações</td>
+            </tr>
+            <tr class="hover:bg-red-50 transition cursor-pointer" onclick="logout()">
+              <td class="px-6 py-4 font-semibold text-red-500">Sair</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Seção de Pedidos -->
+    <section class="mt-8 pb-8 bg-[#9875B7] w-full flex flex-col items-center">
+
+      <div class="flex items-center flex-col w-[90%] md:w-[30%]">
+        <h3 class="text-xl font-semibold text-white mt-4 mb-4 w-full text-start">SEUS PEDIDOS</h3>
+
+        <div class="overflow-y-scroll h-[700px] space-y-4 flex flex-col items-start">
+
+          <div class="max-w-md mr-3 mx-auto bg-white rounded-lg shadow-md p-6" style="background-color: #ffffff;">
+
+              <div class="flex items-center mb-6">
+                  <img src="https://i.imgur.com/e3B8w8j.jpeg" alt="Product Image" class="w-20 h-20 object-cover rounded mr-4">
+                      <div>
+                        <h3 class="text-base font-semibold mb-1" style="color: #0b090d;">Moletom Marrom Feminino</h3>
+                        <p class="text-sm" style="color: #0b090d;">Variação: Marrom,GG</p>
+                        <p class="text-sm" style="color: #0b090d;">x1</p>
+                    </div>
+                    <div class="ml-auto text-right">
+                        <p class="text-lg font-bold text-start w-full" style="color: #9875b7;">R$32,90</p>
+                    </div>
+              </div>
+
+              <div class="flex justify-end items-center mb-6">
+                  <p class="text-base font-semibold mr-2" style="color: #0b090d;">Total do Pedido:</p>
+                  <p class="text-2xl font-bold" style="color: #9875b7;">R$32,90</p>
+              </div>
+
+              <p class="text-sm mb-4 hidden md:block" style="color: #0b090d;">Só confirme o recebimento depois de verificar os itens recebidos</p>
+
+              <div class="flex justify-between space-x-3">
+                  <button class="flex-1 md:px-4 md:py-2 rounded-lg font-semibold" style="background-color: #9875b7; color: #ffffff;">
+                      Acompanhar
+                  </button>
+                  <button class="flex-1 md:px-4 md:py-2 rounded-lg border font-semibold" style="border-color: #ceb8df; color: #0b090d;">
+                      Falar Com Vendedor
+                  </button>
+              </div>
+          </div>
+
+          <div class="max-w-md mr-3 mx-auto bg-white rounded-lg shadow-md p-6" style="background-color: #ffffff;">
+
+              <div class="flex items-center mb-6">
+                  <img src="https://i.imgur.com/e3B8w8j.jpeg" alt="Product Image" class="w-20 h-20 object-cover rounded mr-4">
+                      <div>
+                        <h3 class="text-base font-semibold mb-1" style="color: #0b090d;">Moletom Marrom Feminino</h3>
+                        <p class="text-sm" style="color: #0b090d;">Variação: Marrom,GG</p>
+                        <p class="text-sm" style="color: #0b090d;">x1</p>
+                    </div>
+                    <div class="ml-auto text-right">
+                        <p class="text-lg font-bold text-start w-full" style="color: #9875b7;">R$32,90</p>
+                    </div>
+              </div>
+
+              <div class="flex justify-end items-center mb-6">
+                  <p class="text-base font-semibold mr-2" style="color: #0b090d;">Total do Pedido:</p>
+                  <p class="text-2xl font-bold" style="color: #9875b7;">R$32,90</p>
+              </div>
+
+              <p class="text-sm mb-4 hidden md:block" style="color: #0b090d;">Só confirme o recebimento depois de verificar os itens recebidos</p>
+
+              <div class="flex justify-between space-x-3">
+                  <button class="flex-1 md:px-4 md:py-2 rounded-lg font-semibold" style="background-color: #9875b7; color: #ffffff;">
+                      Acompanhar
+                  </button>
+                  <button class="flex-1 md:px-4 md:py-2 rounded-lg border font-semibold" style="border-color: #ceb8df; color: #0b090d;">
+                      Falar Com Vendedor
+                  </button>
+              </div>
+          </div>
+
+          <div class="max-w-md mr-3 mx-auto bg-white rounded-lg shadow-md p-6" style="background-color: #ffffff;">
+
+              <div class="flex items-center mb-6">
+                  <img src="https://i.imgur.com/e3B8w8j.jpeg" alt="Product Image" class="w-20 h-20 object-cover rounded mr-4">
+                      <div>
+                        <h3 class="text-base font-semibold mb-1" style="color: #0b090d;">Moletom Marrom Feminino</h3>
+                        <p class="text-sm" style="color: #0b090d;">Variação: Marrom,GG</p>
+                        <p class="text-sm" style="color: #0b090d;">x1</p>
+                    </div>
+                    <div class="ml-auto text-right">
+                        <p class="text-lg font-bold text-start w-full" style="color: #9875b7;">R$32,90</p>
+                    </div>
+              </div>
+
+              <div class="flex justify-end items-center mb-6">
+                  <p class="text-base font-semibold mr-2" style="color: #0b090d;">Total do Pedido:</p>
+                  <p class="text-2xl font-bold" style="color: #9875b7;">R$32,90</p>
+              </div>
+
+              <p class="text-sm mb-4 hidden md:block" style="color: #0b090d;">Só confirme o recebimento depois de verificar os itens recebidos</p>
+
+              <div class="flex justify-between space-x-3">
+                  <button class="flex-1 md:px-4 md:py-2 rounded-lg font-semibold" style="background-color: #9875b7; color: #ffffff;">
+                      Acompanhar
+                  </button>
+                  <button class="flex-1 md:px-4 md:py-2 rounded-lg border font-semibold" style="border-color: #ceb8df; color: #0b090d;">
+                      Falar Com Vendedor
+                  </button>
+              </div>
+          </div>
+
+        </div>
+
+      </div>
+
     </section>
 
   </section>
 
   <!-- FOOTER -->
-  <footer class="w-full bg-[#0b090d] text-white py-8 mt-5">
+  <footer class="w-full bg-[#0b090d] text-white py-8">
     <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
       <div>
         <h3 class="text-[#9875b7] text-2xl font-bold">VivaTshirt</h3>
@@ -181,20 +255,8 @@
     </div>
   </footer>
 
-  <script>
-  // Atualiza o ano no rodapé
-  document.getElementById("current-year").textContent = new Date().getFullYear();
-
-  // Preenche os dados do perfil na tela de perfil
-  document.addEventListener("DOMContentLoaded", function() {
-    const perfil = JSON.parse(localStorage.getItem("user")) || {};
-    document.getElementById("nome").textContent = perfil.name || "Nome do Usuário";
-    document.getElementById("email").textContent = perfil.email || "usuario@email.com";
-  });
-</script>
-
   <script src="js/header.js"></script>
-  <script src="js/editar-perfil.js"></script>
+  <script src="js/perfil.js"></script>
   <script src="js/general.js"></script>
 
 </body>

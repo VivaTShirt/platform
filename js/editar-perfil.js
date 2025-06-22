@@ -33,40 +33,6 @@ function buscarCep(input, index) {
   }
 }
 
-// Adicionar campo de endereço
-function adicionarEndereco(valor = {}) {
-  const container = document.getElementById("enderecosContainer");
-  const index = container.children.length; // Para indexar os campos
-  const div = document.createElement("div");
-  div.className = "flex gap-2";
-  div.innerHTML = `
-    <div class="border rounded-md p-4 flex items-center gap-4 w-full bg-gray-50">
-      <input type="radio" name="endereco-principal" class="accent-roxo" style="width:18px;height:18px;" />
-      <div class="flex flex-col gap-1 w-full">
-        <input type="hidden" name="endereco_id" value="${valor.id || ''}">
-        <div class="flex gap-2 mb-1">
-          <input type="text" name="cep" id="cep-${index}" value="${valor.cep || ''}" class="border border-roxo rounded-md p-2 w-1/2" placeholder="CEP" maxlength="9" oninput="buscarCep(this, ${index})">
-          <input type="text" name="address" id="rua-${index}" value="${valor.address || ''}" class="border border-roxo rounded-md p-2 w-1/2" placeholder="Endereço">
-        </div>
-        <div class="flex gap-2">
-          <input type="text" name="address_number" value="${valor.address_number || ''}" class="border border-roxo rounded-md p-2 w-1/3" placeholder="Número">
-          <input type="text" name="neighborhood" id="bairro-${index}" value="${valor.neighborhood || ''}" class="border border-roxo rounded-md p-2 w-1/3" placeholder="Bairro">
-        </div>
-        <div class="flex gap-2 mt-1">
-          <input type="text" name="city" id="cidade-${index}" value="${valor.city || ''}" class="border border-roxo rounded-md p-2 w-1/2" placeholder="Cidade">
-          <input type="text" name="state" id="estado-${index}" value="${valor.state || ''}" class="border border-roxo rounded-md p-2 w-1/4" placeholder="Estado">
-        </div>
-      </div>
-      <button type="button" onclick="this.parentElement.parentElement.remove()" class="text-red-500 font-bold text-lg ml-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-  `;
-  container.appendChild(div);
-}
-
 // Limitar campo telefone a 11 dígitos numéricos (DD + 9 números)
 document.getElementById("telefone").addEventListener("input", function() {
   this.value = this.value.replace(/\D/g, '').slice(0, 11);
@@ -87,7 +53,7 @@ document.getElementById("email").addEventListener("input", function() {
 document.getElementById("profileForm").addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const formData = new FormData(document.getElementById("submitFormToServer"));
+  const formData = new FormData(document.getElementById("profileForm"));
   const dataObj = Object.fromEntries(formData.entries());
 
   // Get values for client-side validation and localStorage update
@@ -145,7 +111,7 @@ document.getElementById("profileForm").addEventListener("submit", async (event) 
   const user = JSON.parse(localStorage.getItem("user"));
 
   // Send request to the server
-  const response = await requestToServer("/customer/profile", "PUT", JSON.stringify(requestBody), user.jwt_token);
+  const response = await requestToServer("/customer/update/" + user.id, "PUT", JSON.stringify(requestBody), user.jwt_token);
 
   if (response?.error) {
     // Server-side error
@@ -172,94 +138,5 @@ document.getElementById("profileForm").addEventListener("submit", async (event) 
   toggleLoading(false);
   return;
 });
-
-// Ensure this script runs after the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', async () => {
-  const enderecosContainer = document.getElementById("enderecosContainer");
-
-  // Get the user ID from localStorage. It's crucial for the endpoint.
-  // Assuming 'user' object in localStorage has an 'id' property.
-  const user = JSON.parse(localStorage.getItem("user"));
-  const customerId = user ? user.id : null;
-
-  if (!customerId) {
-    console.error("User ID not found in localStorage. Cannot fetch addresses.");
-    showAlertCard('danger', 'Erro ao carregar endereços.', 'Faça login novamente.', 3500);
-    return;
-  }
-
-  // --- Show loading indicator before starting the fetch ---
-  toggleLoading(true);
-
-  try {
-    // Construct the endpoint dynamically with the customerId
-    const endpoint = `/customer/address/${customerId}`;
-
-    // Make the request to fetch addresses
-    const addresses = await requestToServer(endpoint, "GET", null, user.jwt_token);
-
-    if (addresses && addresses.length > 0) {
-      // Clear any existing placeholder content in the container if desired
-      enderecosContainer.innerHTML = '';
-
-      // Loop through the fetched addresses and add them to the DOM
-      addresses.forEach(address => {
-        addListiningServerAdress(address);
-      });
-
-      // Set the first address as principal if there are any addresses loaded
-      const firstRadio = document.querySelector('input[name="endereco-principal"]');
-      if (firstRadio) {
-        firstRadio.checked = true;
-      }
-
-    } else {
-      // No addresses found or response is empty
-      console.log("No addresses found for this user.");
-      showAlertCard('info', 'Nenhum endereço cadastrado.', 'Adicione seu primeiro endereço!', 3000);
-      addListiningServerAdress(); // Add an empty address field to start with
-    }
-  } catch (error) {
-    console.error("Error fetching addresses:", error);
-    showAlertCard('danger', 'Erro ao carregar endereços.', 'Tente novamente mais tarde.', 3500);
-  } finally {
-    // --- Hide loading indicator after the fetch (success or error) ---
-    toggleLoading(false);
-  }
-});
-
-// Your existing addListiningServerAdress function
-function addListiningServerAdress(row = {}) {
-  const container = document.getElementById("enderecosContainer");
-  const index = container.children.length; // Para indexar os campos
-  const div = document.createElement("div");
-  div.className = "flex gap-2";
-  div.innerHTML = `
-    <div class="border rounded-md p-4 flex items-center gap-4 w-full bg-gray-50">
-      <input type="radio" name="endereco-principal" class="accent-roxo" style="width:18px;height:18px;" ${row.is_active == true ? 'checked' : ''} />
-      <div class="flex flex-col gap-1 w-full">
-        <input type="hidden" name="endereco_id" value="${row.id || ''}">
-        <div class="flex gap-2 mb-1">
-          <input type="text" name="cep" id="cep-${index}" value="${row.postcode || ''}" class="border border-roxo rounded-md p-2 w-1/2" placeholder="CEP" maxlength="9" oninput="buscarCep(this, ${index})">
-          <input type="text" name="address" id="rua-${index}" value="${row.address || ''}" class="border border-roxo rounded-md p-2 w-1/2" placeholder="Endereço">
-        </div>
-        <div class="flex gap-2">
-          <input type="text" name="address_number" value="${row.address_number || ''}" class="border border-roxo rounded-md p-2 w-1/3" placeholder="Número">
-          <input type="text" name="neighborhood" id="bairro-${index}" value="${row.neighborhood || ''}" class="border border-roxo rounded-md p-2 w-1/3" placeholder="Bairro">
-        </div>
-        <div class="flex gap-2 mt-1">
-          <input type="text" name="city" id="cidade-${index}" value="${row.city || ''}" class="border border-roxo rounded-md p-2 w-1/2" placeholder="Cidade">
-          <input type="text" name="state" id="estado-${index}" value="${row.state || ''}" class="border border-roxo rounded-md p-2 w-1/4" placeholder="Estado">
-        </div>
-      </div>
-      <button type="button" onclick="this.parentElement.parentElement.remove()" class="text-red-500 font-bold text-lg ml-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-  `;
-  container.appendChild(div);
-}
 
 

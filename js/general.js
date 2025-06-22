@@ -1,5 +1,7 @@
 //SERVER  
-const API_URL = "https://c74a-152-243-252-149.ngrok-free.app/v1";
+const API_URL = "http://localhost:3000/v1";
+
+// usuparii fica salvo em "user" no localStorage
 
 // Função para fazer requisições ao servidor
 // rote: rota da API, method: método HTTP (GET, POST, etc.), body: corpo da requisição (opcional), bearerToken: token de autenticação (opcional)
@@ -44,11 +46,6 @@ async function requestToServer(rote, method, body = null, bearerToken = null) {
             console.error("Error in requestToServer:", error);
             throw error;
         });
-}
-
-//pega os dados do usuario no localstorage
-function getUserLocalData() {
-    return JSON.stringify(localStorage.getItem("user"));
 }
 
 //função que verifica se ta logado

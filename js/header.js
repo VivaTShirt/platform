@@ -1,3 +1,20 @@
+// se estiver autenticado, vai dar boas vindas somente se a largura da tela for maior que 850
+document.addEventListener("DOMContentLoaded", async function () {
+    if (window.innerWidth > 850) {
+        const userLocalStorage = JSON.parse(localStorage.getItem("user"));
+
+        if (userLocalStorage) {
+            const welcomeMessage = document.getElementById("userMeetings");
+            if (welcomeMessage) {
+                welcomeMessage.classList.remove("hidden");
+                welcomeMessage.innerHTML = `Olá <strong>${userLocalStorage.name}</strong>!`;
+            }
+        } else {
+            console.log("Usuário não autenticado.");
+        }
+    }
+});
+
 //evento que faz a search bar aparecer e desaparecer
 document.getElementById("toggleSearchBar").addEventListener("click", () => {
 
