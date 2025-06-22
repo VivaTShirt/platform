@@ -196,31 +196,39 @@ function toggleLoading(show) {
 }
 
 // funcão que adiciona produto ao carrinho
-function addProductToCart(product) {
-
-  // {
-  //   "id": "produto_id",
-  //   "name": "Nome do Produto",
-  //   "quantity": 1,
-  //   "price": 100.00
-  // }
-
+function addProductToCart(mainImgSrc, productId, productName, productSize, productColor, productValue, productQuantity) {
   const cartKey = 'cart_products';
-  // Busca o carrinho atual ou inicializa como array vazio
   let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
-  // Verifica se o produto já existe no carrinho
-  const existingIndex = cart.findIndex(item => item.id === product.id);
+  // Usa productQuantity se fornecido, senão pega do input, senão 1
+  const quantity = parseInt(productQuantity) || parseInt(document.getElementById('quantidade').value) || 1;
+  const price = parseFloat(productValue.replace(/[^\d,.-]/g, '').replace(',', '.')) || 0;
+
+  const obj = {
+    imgSrc: mainImgSrc,
+    id: productId,
+    name: productName,
+    size: productSize,
+    color: productColor,
+    quantity: quantity,
+    price: price
+  };
+
+  // Verifica se o produto já existe no carrinho (mesmo id, size e color)
+  const existingIndex = cart.findIndex(item =>
+    item.id === obj.id &&
+    item.size === obj.size &&
+    item.color === obj.color
+  );
 
   if (existingIndex !== -1) {
     // Se já existe, soma a quantidade
-    cart[existingIndex].quantity += product.quantity;
+    cart[existingIndex].quantity += obj.quantity;
   } else {
     // Se não existe, adiciona novo produto
-    cart.push(product);
+    cart.push(obj);
   }
 
-  // Salva o carrinho atualizado no localStorage
   localStorage.setItem(cartKey, JSON.stringify(cart));
 }
 
@@ -233,6 +241,16 @@ function removeProductFromCart(productId) {
 
   // Atualiza o carrinho no localStorage
   localStorage.setItem(cartKey, JSON.stringify(cart));
+}
+
+function updateProductQuantity(productId, newQuantity) {
+  const cartKey = 'cart_products';
+  let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+  const idx = cart.findIndex(item => item.id == productId);
+  if (idx !== -1) {
+    cart[idx].quantity = parseInt(newQuantity) || 1;
+    localStorage.setItem(cartKey, JSON.stringify(cart));
+  }
 }
 
 //função que retorna a quantidade de itens no carrinho
@@ -256,3 +274,7 @@ function getCartSubtotalAndTotal() {
   const total = subtotal;
   return { subtotal, total };
 }
+
+window.removeProductFromCart = removeProductFromCart;
+window.updateProductQuantity = updateProductQuantity;
+

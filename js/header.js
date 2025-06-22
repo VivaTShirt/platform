@@ -28,9 +28,8 @@ document.getElementById("toggleSearchBar").addEventListener("click", () => {
 
 });
 
-//modal de carrinho
-document.getElementById("toggleCardModal").addEventListener("click", () => {
-
+function toogleModalCard() {
+    
     let modalCart = document.getElementById('modalCart');
 
     if (modalCart.classList.contains("hidden")) {
@@ -38,6 +37,12 @@ document.getElementById("toggleCardModal").addEventListener("click", () => {
     } else {
         modalCart.classList.add("hidden");
     }
+}
+
+//modal de carrinho
+document.getElementById("toggleCardModal").addEventListener("click", () => {
+
+    toogleModalCard();
 
 });
 
@@ -50,44 +55,55 @@ document.getElementById("closeModalCartMobile").addEventListener("click", () => 
 
 });
 
-//rendiriza produtos no modal de carrinho
 function renderModalCartProducts() {
     const cartKey = 'cart_products';
     const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
     const container = document.getElementById('cartProductsLines');
-    container.innerHTML = ''; // Limpa o conteúdo atual
+    container.innerHTML = '';
 
     // Calcula subtotal e total
     let subtotal = 0;
-    cart.forEach(product => {
+
+    // Usa os campos do objeto diretamente, sem fallback desnecessário
+    const mappedCart = cart.map(product => {
+        return {
+            imgSrc: product.imgSrc || product.mainImgSrc || 'https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg',
+            id: product.id || product.productId || 0,
+            name: product.name || product.productName || 'N/A',
+            size: product.size || product.productSize || 'N/A',
+            color: product.color || product.productColor || 'N/A',
+            quantity: product.quantity || 1,
+            price: product.price || '0.00'
+        };
+    });
+
+    mappedCart.forEach(product => {
         const price = parseFloat(product.price) || 0;
         const quantity = parseInt(product.quantity) || 1;
         subtotal += price * quantity;
     });
-    // Aqui você pode adicionar descontos, frete, etc. para calcular o total se quiser
-    const total = subtotal; // Se não houver outros valores, total = subtotal
 
-    // Atualiza os elementos de subtotal e total
+    const total = subtotal;
+
     const subTotalEl = document.getElementById('modalCardProductsSubTotal');
     const totalEl = document.getElementById('modalCardProductsTotal');
     if (subTotalEl) subTotalEl.textContent = `R$ ${subtotal.toFixed(2)}`;
     if (totalEl) totalEl.textContent = `R$ ${total.toFixed(2)}`;
 
-    if (cart.length === 0) {
+    if (mappedCart.length === 0) {
         container.innerHTML = '<p class="text-center mb-[300px] text-gray-500">Seu carrinho está vazio.</p>';
         return;
     }
 
     const ul = document.createElement('ul');
     ul.className = 'space-y-4';
-
-    cart.forEach((product, idx) => {
+    mappedCart.forEach((product, idx) => {
         const li = document.createElement('li');
         li.className = 'flex items-center gap-4';
 
         li.innerHTML = `
             <img
-                src="${product.image || 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80'}"
+                src="${product.imgSrc}"
                 alt=""
                 class="size-16 rounded-sm object-cover"
             />
@@ -95,29 +111,30 @@ function renderModalCartProducts() {
                 <h3 class="text-sm text-gray-900">${product.name}</h3>
                 <dl class="mt-0.5 space-y-px text-[10px] text-gray-600">
                     <div>
-                        <dt class="inline">Size:</dt>
+                        <dt class="inline">Tamanho:</dt>
                         <dd class="inline">${product.size || '-'}</dd>
                     </div>
                     <div>
-                        <dt class="inline">Color:</dt>
+                        <dt class="inline">Cor:</dt>
                         <dd class="inline">${product.color || '-'}</dd>
                     </div>
                 </dl>
             </div>
             <div class="flex flex-1 items-center justify-end gap-2">
                 <form onsubmit="return false;">
-                    <label for="Line${idx}Qty" class="sr-only"> Quantity </label>
+                    <label for="Line${idx}Qty" class="sr-only"> Quantidade </label>
                     <input
                         type="number"
                         min="1"
                         value="${product.quantity}"
                         id="Line${idx}Qty"
-                        class="h-8 w-12 rounded-sm border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-hidden [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
-                        onchange="updateProductQuantity(${product.id}, this.value)"
+                        data-product-id="${product.id}"
+                        class="cart-qty-input h-8 w-12 rounded-sm border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-hidden [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
                     />
                 </form>
-                <button class="text-gray-600 transition hover:text-red-600" onclick="removeProductFromCart(${product.id})">
-                    <span class="sr-only">Remove item</span>
+                <button class="cart-remove-btn text-gray-600 transition hover:text-red-600"
+                    data-product-id="${product.id}">
+                    <span class="sr-only">Remover Item</span>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -139,6 +156,25 @@ function renderModalCartProducts() {
     });
 
     container.appendChild(ul);
+
+    // Adiciona listeners para inputs de quantidade
+    ul.querySelectorAll('.cart-qty-input').forEach(input => {
+        input.addEventListener('change', function () {
+            const productId = this.getAttribute('data-product-id');
+            const newQty = this.value;
+            updateProductQuantity(productId, newQty);
+            renderModalCartProducts();
+        });
+    });
+
+    // Adiciona listeners para botões de remover
+    ul.querySelectorAll('.cart-remove-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const productId = this.getAttribute('data-product-id');
+            removeProductFromCart(productId);
+            renderModalCartProducts();
+        });
+    });
 }
 
 renderModalCartProducts();

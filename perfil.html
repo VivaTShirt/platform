@@ -74,10 +74,10 @@
 
               <div class="flex justify-end">
                 <a
-                  href="#"
+                  href="carrinho"
                   class="block rounded-sm bg-[#b78bc8] px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
                 >
-                  <strong>Comprar</strong>
+                  <strong>Confirmar</strong>
                 </a>
               </div>
 
@@ -112,12 +112,21 @@
           <tbody>
             <tr class="hover:bg-[#f3eaf7] transition cursor-pointer" onclick="window.location.href='editar-perfil'">
               <td class="px-6 py-4 font-semibold text-[#9875B7]">Editar Perfil</td>
+              <td class="px-6 py-4 text-right">
+                <span class="inline-block bg-[#9875B7] text-white px-3 py-1 rounded-full text-xs truncate">Aperte para editar o perfil</span>
+              </td>
             </tr>
             <tr class="hover:bg-[#f3eaf7] transition cursor-pointer" onclick="window.location.href='configuracoes'">
               <td class="px-6 py-4 font-semibold text-[#9875B7]">Configurações</td>
+              <td class="px-6 py-4 text-right">
+                <span class="inline-block bg-[#CEB8DF] text-[#9875B7] px-3 py-1 rounded-full text-xs truncate">Aperte para acessar configurações</span>
+              </td>
             </tr>
             <tr class="hover:bg-red-50 transition cursor-pointer" onclick="logout()">
               <td class="px-6 py-4 font-semibold text-red-500">Sair</td>
+              <td class="px-6 py-4 text-right">
+                <span class="inline-block bg-red-500 text-white px-3 py-1 rounded-full text-xs truncate">Aperte para sair da conta</span>
+              </td>
             </tr>
           </tbody>
         </table>
