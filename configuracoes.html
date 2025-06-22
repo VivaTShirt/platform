@@ -26,7 +26,16 @@
 
   <!-- CONTEÚDO PRINCIPAL -->
   <main class="flex-1 flex items-center justify-center p-6">
+
     <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
+      <div class="mb-6">
+        <button onclick="window.location.href='perfil.html'" class="flex items-center text-roxo hover:text-purple-800 transition text-sm font-medium">
+          <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Voltar para o perfil
+        </button>
+      </div>
       <h2 class="text-xl font-semibold text-roxo mb-6 text-center">Alterar Senha</h2>
 
       <!-- Alterar senha -->
@@ -49,6 +58,9 @@
       <!-- Apagar conta -->
       <div class="mt-8 text-center">
         <button onclick="abrirModalExcluir()" class="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-700 transition">Apagar Conta</button>
+      </div>
+      <div class="mt-4 text-center">
+        <a href="esqueci-a-senha.html" class="text-roxo underline hover:text-purple-800 transition text-sm">Esqueci minha senha</a>
       </div>
     </div>
   </main>

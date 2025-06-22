@@ -44,6 +44,7 @@ document.getElementById("submitFormToServer").addEventListener("submit", async f
     const requestBody = {
       "name": dataObj.nome,
       "email": dataObj.email,
+      "phone": dataObj.telefone,
       "password": dataObj.senha
     };
 

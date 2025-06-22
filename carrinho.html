@@ -9,7 +9,7 @@
   <title>Carrinho</title>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-lilas min-h-screen flex flex-col justify-between font-sans">
 
   <!-- HEADER -->
     <header class="w-full h-[80px] bg-[#B78BC8] flex items-center p-[5px] lg:p-5 justify-between">
@@ -95,27 +95,36 @@
     </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-[#0b090d] text-white py-8 mt-8">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-      <div><h3 class="text-[#9875b7] text-xl font-bold">VivaTshirt</h3></div>
-
-      <ul class="flex flex-col md:flex-row gap-4 text-[#ceb8df] text-sm text-center">
-        <li><a href="#" class="hover:text-[#9875b7] transition-colors">FAQ</a></li>
-        <li><a href="#" class="hover:text-[#9875b7] transition-colors">Contato</a></li>
-        <li><a href="#" class="hover:text-[#9875b7] transition-colors">Sobre</a></li>
-      </ul>
-
-      <div class="flex gap-4">
-        <a href="#"><img src="image/Facebook.svg" alt="Facebook" class="w-6 h-6" /></a>
-        <a href="#"><img src="image/Instagram.svg" alt="Instagram" class="w-6 h-6" /></a>
-        <a href="#"><img src="image/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6" /></a>
+    <!-- FOOTER -->
+    <footer class="bg-[#0b090d] text-white py-8 mt-5">
+      <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+        <!-- Nome da empresa -->
+        <div>
+          <h3 class="text-[#9875b7] text-2xl font-bold">VivaTshirt</h3>
+        </div>
+        <!-- Navegação simples -->
+        <ul class="flex flex-col md:flex-row gap-4 text-[#ceb8df] text-sm">
+          <li><a href="#" class="hover:text-[#9875b7] transition-colors">FAQ</a></li>
+          <li><a href="#" class="hover:text-[#9875b7] transition-colors">Contato</a></li>
+          <li><a href="#" class="hover:text-[#9875b7] transition-colors">Sobre</a></li>
+        </ul>
+        <!-- Redes sociais -->
+        <div class="flex space-x-4">
+          <a href="#" aria-label="Facebook" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+            <img src="image/Facebook.svg" alt="Facebook" class="w-6 h-6">
+          </a>
+          <a href="#" aria-label="Instagram" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+            <img src="image/Instagram.svg" alt="Instagram" class="w-6 h-6">
+          </a>
+          <a href="#" aria-label="WhatsApp" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+            <img src="image/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6">
+          </a>
+        </div>
       </div>
-    </div>
-    <div class="mt-4 text-center text-[#ceb8df] text-xs">
-      &copy; <span id="current-year"></span> VivaTshirt. Todos os direitos reservados.
-    </div>
-  </footer>
+      <div class="mt-6 text-center text-[#ceb8df] text-xs">
+        &copy; <span id="current-year"></span> VivaTshirt. Todos os direitos reservados.
+      </div>
+    </footer>
 
   <script src="js/header.js"></script>
   <script>

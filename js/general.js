@@ -91,7 +91,6 @@ function redirectIfLogged() {
 }
 
 //DOM
-
 //função que libera o card de alerta, aletType = danger / success
 function showAlertCard(alertType, title, description, duration) {
   // Define base classes for the alert container
@@ -201,6 +200,14 @@ function toggleLoading(show) {
 
 // funcão que adiciona produto ao carrinho
 function addProductToCart(product) {
+
+  // {
+  //   "id": "produto_id",
+  //   "name": "Nome do Produto",
+  //   "quantity": 1,
+  //   "price": 100.00
+  // }
+
   const cartKey = 'cart_products';
   // Busca o carrinho atual ou inicializa como array vazio
   let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
@@ -220,10 +227,35 @@ function addProductToCart(product) {
   localStorage.setItem(cartKey, JSON.stringify(cart));
 }
 
+function removeProductFromCart(productId) {
+  const cartKey = 'cart_products';
+  let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+  // Filtra removendo o produto com o id informado
+  cart = cart.filter(item => item.id !== productId);
+
+  // Atualiza o carrinho no localStorage
+  localStorage.setItem(cartKey, JSON.stringify(cart));
+}
+
 //função que retorna a quantidade de itens no carrinho
 function getCartTotalItems() {
   const cartKey = 'cart_products';
   const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
   // Soma todas as quantidades dos produtos no carrinho
   return cart.reduce((total, item) => total + (item.quantity || 0), 0);
+}
+
+function getCartSubtotalAndTotal() {
+  const cartKey = 'cart_products';
+  const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+  // Calcula o subtotal
+  const subtotal = cart.reduce((sum, item) => {
+    const price = Number(item.price) || 0;
+    const quantity = Number(item.quantity) || 0;
+    return sum + price * quantity;
+  }, 0);
+  // Por enquanto, total é igual ao subtotal
+  const total = subtotal;
+  return { subtotal, total };
 }

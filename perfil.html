@@ -23,37 +23,101 @@
 
   <!-- HEADER -->
   <header class="w-full h-[80px] bg-[#B78BC8] flex items-center p-[5px] lg:p-5 justify-between">
+
+    <!-- parte esquerda -->
     <div>
       <img class="w-[50px] lg:w-[65px]" src="image/logo.svg" alt="Logo VivaTshirt" />
     </div>
+
+    <!-- parte direita -->
     <div class="flex-row flex items-center gap-[15px]">
+
       <div id="searchBar" class="p-2 bg-white rounded-[30px] transition-opacity duration-300 opacity-0">
         <input type="text" class="outline-none bg-transparent" placeholder="Buscar..." />
       </div>
+
       <div id="toggleSearchBar" class="cursor-pointer">
         <img class="w-[25px] lg:w-[35px]" src="image/Search.svg" alt="Lupa" />
       </div>
-      <a href="">
+
+      <div id="toggleCardModal" class="cursor-pointer">
         <img class="w-[25px] lg:w-[35px]" src="image/Shopping Cart.svg" alt="Carrinho" />
-      </a>
-      <a href="">
+      </div>
+
+      <a href="/perfil.html">
         <img class="w-[25px] lg:w-[35px]" src="image/Test Account.svg" alt="Perfil" />
       </a>
+
     </div>
+
+    <!-- modal de carrinho -->
+    <section id="modalCart" class="fixed md:absolute md:top-[64px] md:right-[65px] inset-0 z-50 flex items-end md:items-start justify-center md:justify-end bg-white md:bg-transparent hidden">
+      <div class="w-full h-full absolute inset-0 md:hidden" aria-hidden="true"></div>
+      <div class="relative w-full md:w-[400px] max-w-full md:max-w-md md:bg-white rounded-t-2xl md:rounded-2xl shadow-lg p-0 overflow-y-auto max-h-[90vh]">
+
+        <div class="mt-8 px-4 md:px-6 pb-8 md:pb-6">
+          
+          <!-- botao para fechar o modal mobile -->
+            <div id="closeModalCartMobile" class="w-full flex justify-center">
+              <button  class="p-2 rounded-full hover:bg-gray-200 transition duration-200 sm:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+          <ul id="cartProductsLines" class="space-y-4">
+
+          </ul>
+
+          <div class="mt-8 flex justify-end border-t border-gray-100 pt-8">
+            <div class="w-full space-y-4">
+              <dl class="space-y-0.5 text-sm text-gray-700">
+                <div class="flex justify-between">
+                  <dt>Subtotal</dt>
+                  <dd id="modalCardProductsSubTotal">...</dd>
+                </div>
+                <div class="flex justify-between !text-base font-medium">
+                  <dt>Total</dt>
+                  <dd id="modalCardProductsTotal">...</dd>
+                </div>
+              </dl>
+
+              <div class="flex justify-end">
+                <a
+                  href="#"
+                  class="block rounded-sm bg-[#b78bc8] px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+                >
+                  <strong>Comprar</strong>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
   </header>
 
   <!-- CONTEÚDO PRINCIPAL -->
-  <main class="flex-1 flex flex-col items-center">
+  <section class="flex-1 flex flex-col items-center w-full min-h-screen">
 
     <!-- Perfil do Usuário -->
-    <div class="bg-white rounded-2xl shadow-lg p-8 mt-10 w-11/12 md:w-2/3 lg:w-1/2 flex flex-col items-center">
-      <div class="w-32 h-32 bg-lilas rounded-full flex items-center justify-center mb-4">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-roxo" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A11.955 11.955 0 0112 15c2.197 0 4.243.636 5.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
-      </div>
-      <h2 id="name" class="text-2xl font-semibold text-roxo mb-2">Nome do Usuário</h2>
-      <p id="email" class="text-gray-600 mb-4">usuario@email.com</p>
+    <div class="bg-white rounded-2xl shadow-lg p-8 mt-0 w-full md:w-4/3 flex flex-col  min-h-screen">
+     <div class="flex items-center gap-6 mb-4">
+  <div class="w-20 h-20 bg-lilas rounded-full flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-roxo" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A11.955 11.955 0 0112 15c2.197 0 4.243.636 5.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  </div>
+  <div>
+    <h2 id="nome" class="text-2xl font-semibold text-roxo mb-2"></h2>
+    <p id="email" class="text-gray-600 mb-4"></p>
+  </div>
+</div>
       <!-- Botões de ação no perfil.html -->
         <div class="flex space-x-4">
         <button onclick="window.location.href='editar-perfil.html'" 
@@ -61,28 +125,39 @@
             Editar Perfil
         </button>
         
-        <div class="relative">
-        <button onclick="window.location.href='configuracoes.html'" 
-            class="bg-lilas text-roxo px-4 py-2 rounded-full hover:bg-purple-300 transition">
+        <button onclick="window.location.href='configuracoes.html'" class="bg-lilas text-roxo px-4 py-2 rounded-full hover:bg-purple-300 transition">
             Configurações
         </button>
-        
-        </div>
 
+        <button onclick="logout()" 
+            class="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition">
+            Sair
+        </button>
+        <script>
+          function logout() {
+            localStorage.removeItem("user");
+            window.location.href = 'login.html';
+          }
+        </script>
         </div>
 
     <!-- Seção de Pedidos Recentes -->
     <section class="w-11/12 md:w-2/3 lg:w-1/2 mt-8 mb-8">
       <h3 class="text-xl font-semibold text-roxo mb-4">Pedidos Recentes</h3>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-white rounded-xl shadow p-4 flex flex-col items-center">
-          <img src="https://via.placeholder.com/100" alt="Produto" class="rounded-lg mb-2">
-          <p class="text-gray-700 text-sm text-center">Produto Exemplo</p>
+        <div class="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center w-full">
+          <!-- <img src="https://via.placeholder.com/140" alt="Produto" class="rounded-lg mb-4 w-32 h-32"> -->
+          <p class="text-gray-700 text-base text-center font-medium">Produto Exemplo</p>
         </div>
+        <div class="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center w-full">
+          <!-- <img src="https://via.placeholder.com/140" alt="Produto" class="rounded-lg mb-4 w-32 h-32"> -->
+          <p class="text-gray-700 text-base text-center font-medium">Produto Exemplo</p>
+        </div>
+        <!-- Adicione mais pedidos aqui, se necessário -->
       </div>
     </section>
 
-  </main>
+  </section>
 
   <!-- FOOTER -->
   <footer class="w-full bg-[#0b090d] text-white py-8 mt-5">
@@ -106,6 +181,19 @@
     </div>
   </footer>
 
+  <script>
+  // Atualiza o ano no rodapé
+  document.getElementById("current-year").textContent = new Date().getFullYear();
+
+  // Preenche os dados do perfil na tela de perfil
+  document.addEventListener("DOMContentLoaded", function() {
+    const perfil = JSON.parse(localStorage.getItem("user")) || {};
+    document.getElementById("nome").textContent = perfil.name || "Nome do Usuário";
+    document.getElementById("email").textContent = perfil.email || "usuario@email.com";
+  });
+</script>
+
+  <script src="js/header.js"></script>
   <script src="js/editar-perfil.js"></script>
   <script src="js/general.js"></script>
 
