@@ -14,10 +14,12 @@
   <!-- HEADER -->
   <header class="w-full h-[80px] bg-[#B78BC8] flex items-center p-[5px] lg:p-5 justify-between">
 
-    <!-- parte esquerda -->
-    <div>
-      <img class="w-[50px] lg:w-[65px]" src="image/logo.svg" alt="Logo VivaTshirt" />
-    </div>
+      <!-- parte esquerda -->
+      <div>
+        <a href="/">
+          <img class="w-[50px] lg:w-[65px]" src="image/logo.svg" alt="Logo VivaTshirt" />
+        </a>
+      </div>
 
     <!-- parte direita -->
     <div class="flex-row flex items-center gap-[15px]">
@@ -93,19 +95,20 @@
 
   </header>
 
+  <!-- PAGINA -->
   <main class="px-4 py-6">
     <h1 class="text-xl font-bold text-gray-800 mb-4">Carrinho de compras</h1>
 
     <!-- PRODUTO -->
-    <div class="bg-white p-4 rounded-lg shadow-md flex flex-col lg:flex-row gap-6">
+    <div class="bg-white p-4 rounded-lg shadow-md gap-6 flex flex-col">
 
       <!-- IMAGEM E DETALHES -->
       <div class="flex flex-col sm:flex-row gap-4 flex-1">
-        <img src="image/modelo1.svg" alt="Camiseta Body Feminina" class="w-full sm:w-32 h-auto object-contain" />
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg" alt="Camiseta Body Feminina" class="w-full sm:w-32 h-auto object-contain" />
 
         <div>
-          <h2 class="font-semibold text-lg text-gray-700">Camiseta Body Feminina</h2>
-          <p class="text-green-600 text-sm mt-1">Em estoque</p>
+          <h2 class="font-semibold text-lg text-gray-700">...</h2>
+          <p class="text-green-600 text-sm mt-1">N/A</p>
 
           <p class="text-sm text-gray-600 mt-4">Descrição do produto:</p>
           <p class="text-sm text-gray-500 mt-1">
@@ -124,7 +127,7 @@
 
       <!-- PREÇO E QUANTIDADE -->
       <div class="flex flex-col items-end justify-between">
-        <p class="text-lg font-semibold text-gray-800">R$80,99</p>
+        <p class="text-lg font-semibold text-gray-800">...</p>
 
         <div class="flex items-center border rounded-full mt-4">
           <button id="btn-diminuir"
@@ -134,6 +137,7 @@
             class="px-3 text-lg font-bold text-purple-500 hover:text-purple-700">+</button>
         </div>
       </div>
+
     </div>
 
     <!-- SUBTOTAL -->
@@ -148,72 +152,43 @@
         Comprar
       </button>
     </div>
+    
   </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-[#0b090d] text-white py-8 mt-5">
-      <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-        <!-- Nome da empresa -->
-        <div>
-          <h3 class="text-[#9875b7] text-2xl font-bold">VivaTshirt</h3>
-        </div>
-        <!-- Navegação simples -->
-        <ul class="flex flex-col md:flex-row gap-4 text-[#ceb8df] text-sm">
-          <li><a href="#" class="hover:text-[#9875b7] transition-colors">FAQ</a></li>
-          <li><a href="#" class="hover:text-[#9875b7] transition-colors">Contato</a></li>
-          <li><a href="#" class="hover:text-[#9875b7] transition-colors">Sobre</a></li>
-        </ul>
-        <!-- Redes sociais -->
-        <div class="flex space-x-4">
-          <a href="#" aria-label="Facebook" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
-            <img src="image/Facebook.svg" alt="Facebook" class="w-6 h-6">
-          </a>
-          <a href="#" aria-label="Instagram" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
-            <img src="image/Instagram.svg" alt="Instagram" class="w-6 h-6">
-          </a>
-          <a href="#" aria-label="WhatsApp" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
-            <img src="image/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6">
-          </a>
-        </div>
+  <!-- FOOTER -->
+  <footer class="bg-[#0b090d] text-white py-8 mt-5">
+    <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+      <!-- Nome da empresa -->
+      <div>
+        <h3 class="text-[#9875b7] text-2xl font-bold">VivaTshirt</h3>
       </div>
-      <div class="mt-6 text-center text-[#ceb8df] text-xs">
-        &copy; <span id="current-year"></span> VivaTshirt. Todos os direitos reservados.
+      <!-- Navegação simples -->
+      <ul class="flex flex-col md:flex-row gap-4 text-[#ceb8df] text-sm">
+        <li><a href="#" class="hover:text-[#9875b7] transition-colors">FAQ</a></li>
+        <li><a href="#" class="hover:text-[#9875b7] transition-colors">Contato</a></li>
+        <li><a href="#" class="hover:text-[#9875b7] transition-colors">Sobre</a></li>
+      </ul>
+      <!-- Redes sociais -->
+      <div class="flex space-x-4">
+        <a href="#" aria-label="Facebook" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+          <img src="image/Facebook.svg" alt="Facebook" class="w-6 h-6">
+        </a>
+        <a href="#" aria-label="Instagram" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+          <img src="image/Instagram.svg" alt="Instagram" class="w-6 h-6">
+        </a>
+        <a href="#" aria-label="WhatsApp" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+          <img src="image/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6">
+        </a>
       </div>
-    </footer>
+    </div>
+    <div class="mt-6 text-center text-[#ceb8df] text-xs">
+      &copy; <span id="current-year"></span> VivaTshirt. Todos os direitos reservados.
+    </div>
+  </footer>
 
   <script src="js/header.js"></script>
-  <script>
-    const precoUnitario = 80.99;
-    const quantidadeEl = document.getElementById("quantidade");
-    const subtotalEl = document.getElementById("subtotal");
-    const qtdSubtotalEl = document.getElementById("quantidade-subtotal");
-
-    const btnMais = document.getElementById("btn-aumentar");
-    const btnMenos = document.getElementById("btn-diminuir");
-
-    let quantidade = 1;
-
-    function atualizarValores() {
-      quantidadeEl.textContent = quantidade;
-      qtdSubtotalEl.textContent = quantidade;
-      const total = (quantidade * precoUnitario).toFixed(2).replace('.', ',');
-      subtotalEl.textContent = `R$ ${total}`;
-    }
-
-    btnMais.addEventListener("click", () => {
-      quantidade++;
-      atualizarValores();
-    });
-
-    btnMenos.addEventListener("click", () => {
-      if (quantidade > 1) {
-        quantidade--;
-        atualizarValores();
-      }
-    });
-
-    document.getElementById("current-year").textContent = new Date().getFullYear();
-  </script>
+  <script src="js/general.js"></script>
+  <script src="js/carrinho.js"></script>
 </body>
 
 </html>

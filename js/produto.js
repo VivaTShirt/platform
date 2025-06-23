@@ -1,9 +1,42 @@
-const corProduto = document.getElementById('corProduto')?.textContent.trim() || '';
-const imagemPrincipal = document.getElementById('imagemPrincipal')?.src || '';
-const nomeProduto = document.getElementById('nomeProduto')?.textContent.trim() || '';
-const valorProduto = document.getElementById('valorProduto')?.textContent.trim() || '';
+// Função para pegar os parâmetros da URL
+function getQueryParams() {
+  const params = {};
+  window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
+    params[key] = decodeURIComponent(value);
+  });
+  return params;
+}
+
+const params = getQueryParams();
+const imagemPrincipal = "http://localhost:8081/" + params.img || '';
+const nomeProduto = params.nome || '';
+const valorProduto = params.preco ? `R$ ${params.preco}` : '';
 const quantidade = document.getElementById('quantidade')?.textContent.trim() || '';
 let productSize = '';
+const corProduto = document.getElementById('corProduto')?.textContent.trim() || '';
+
+// Preencher os dados do produto com base na query string
+window.addEventListener('DOMContentLoaded', () => {
+  const params = getQueryParams();
+
+  if (params.nome) {
+    const nomeProdutoEl = document.getElementById('nomeProduto');
+    if (nomeProdutoEl) nomeProdutoEl.textContent = params.nome;
+  }
+
+  if (params.preco) {
+    const valorProdutoEl = document.getElementById('valorProduto');
+    if (valorProdutoEl) valorProdutoEl.textContent = `R$ ${params.preco}`;
+  }
+
+  if (params.img) {
+    const imagemPrincipalEl = document.getElementById('imagemPrincipal');
+    if (imagemPrincipalEl) imagemPrincipalEl.src = params.img;
+    // Se quiser trocar as miniaturas também, faça aqui
+    const imagem1El = document.getElementById('imagem1');
+    if (imagem1El) imagem1El.src = params.img;
+  }
+});
 
 //para efeito de hover nos tamanhos do produto
 const botoesTamanho = document.querySelectorAll('.tamanho-btn');
@@ -21,6 +54,7 @@ botoesTamanho.forEach((btn) => {
   document.getElementById('increment').onclick = () => {
       input.value = parseInt(input.value) + 1;
   };
+  
   document.getElementById('decrement').onclick = () => {
       if (parseInt(input.value) > 1) input.value = parseInt(input.value) - 1;
   };
@@ -42,6 +76,7 @@ botoesTamanho.forEach((btn) => {
 
   descricao.style.maxHeight = '3rem';
 
+  //botap que adiciona no localstorage do carrinho e redireciona para a página do carrinho
   document.getElementById('btnAdicionarCarrinho').addEventListener('click', () => {
 
     if (productSize === '') {

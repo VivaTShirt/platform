@@ -1,5 +1,5 @@
 //SERVER  
-const API_URL = "http://localhost:3000/v1";
+const API_URL = "https://c74a-152-243-252-149.ngrok-free.app/v1";
 
 // usuparii fica salvo em "user" no localStorage
 
@@ -10,8 +10,9 @@ async function requestToServer(rote, method, body = null, bearerToken = null) {
         method: method,
         headers: {
             "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "true"
         },
-        credentials: "include"
+        //credentials: "include"
     };
 
     if (body) {
