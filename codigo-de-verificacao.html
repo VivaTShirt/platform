@@ -20,15 +20,19 @@
   </header>
 
   <!-- conteudo -->
-  <main class="bg-purple-100 w-full p-6">
+  <main class="w-full p-6">
+
     <section class="min-h-screen flex items-center justify-center px-4 flex flex-col">
-      <h2 class="text-3xl font-semibold text-center text-[#B78BC8] mb-6">Verificar Código</h2>
-      <p class="text-gray-600 mb-4 text-center">Enviamos um código para seu e-mail. Digite abaixo:</p>
-      <form id="submitFormToServer">
-        <input name="code" type="text" placeholder="Código de verificação" class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-[#B78BC8] tracking-widest text-center" />
-        <button type="submit" class="w-full bg-[#B78BC8] text-white py-3 rounded-lg hover:bg-[#a56bb8] transition-colors">Verificar</button>
-      </form>
+      <div class="md:w-[50%]">
+        <h2 class="text-3xl font-semibold text-center text-[#B78BC8] mb-6">Verificar Código</h2>
+        <p class="text-gray-600 mb-4 text-center">Enviamos um código para seu e-mail. Digite abaixo:</p>
+        <form id="submitFormToServer">
+          <input name="code" type="text" placeholder="Código de verificação" class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-[#B78BC8] tracking-widest text-center" />
+          <button type="submit" class="w-full bg-[#B78BC8] text-white py-3 rounded-lg hover:bg-[#a56bb8] transition-colors">Verificar</button>
+        </form>
+      </div>
     </section>
+
   </main>
 
   <script src="js/general.js"></script>

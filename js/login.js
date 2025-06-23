@@ -36,6 +36,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+//verificar se o usuário apagou alguma conta
+document.addEventListener("DOMContentLoaded", function () {
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const recentDeletedAccount = urlParams.get("deletedAccount");
+
+  if (recentDeletedAccount !== null) {
+
+    showAlertCard("success", "Conta excluída com sucesso.", "", 3500);
+
+    // Remove o parâmetro da URL sem recarregar a página
+    if (recentDeletedAccount) {
+      const url = new URL(window.location);
+      url.searchParams.delete("deletedAccount");
+      window.history.replaceState({}, document.title, url.pathname + url.search);
+    }
+
+
+  }
+
+});
+
 //veiricar se o usuário acabou de se cadastrar
 document.addEventListener("DOMContentLoaded", function () {
   

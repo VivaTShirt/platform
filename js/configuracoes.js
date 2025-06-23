@@ -1,46 +1,77 @@
-    // Alterar senha
-    function alterarSenha() {
-      const senhaAtual = document.getElementById('senhaAtual').value.trim();
-      const novaSenha = document.getElementById('novaSenha').value.trim();
-      const confirmarSenha = document.getElementById('confirmarSenha').value.trim();
+// Alterar senha
+async function alterarSenha() {
+  const senhaAtual = document.getElementById('senhaAtual').value.trim();
+  const novaSenha = document.getElementById('novaSenha').value.trim();
+  const confirmarSenha = document.getElementById('confirmarSenha').value.trim();
 
-      const perfil = JSON.parse(localStorage.getItem("perfil"));
+  const user = JSON.parse(localStorage.getItem("user"));
 
-      if (!perfil) {
-        showAlert();
-        return;
-      }
+  if (!user || !user.token) {
+    showAlertCard("danger","Usuário não autenticado.", "Por favor, faça login novamente.", 3500);
+    return;
+  }
 
-      if (senhaAtual !== perfil.senha) {
-        showAlert("A senha atual está incorreta.");
-        return;
-      }
+  if (novaSenha.length < 4) {
+    showAlertCard("danger","A nova senha deve ter pelo menos 4 caracteres.", "Por favor, escolha uma senha mais longa.", 3500);
+    return;
+  }
 
-      if (novaSenha.length < 4) {
-        showAlert("A nova senha deve ter pelo menos 4 caracteres.");
-        return;
-      }
+  if (novaSenha !== confirmarSenha) {
+    showAlertCard("danger","A nova senha e a confirmação não coincidem.", "Por favor, verifique se digitou a senha corretamente.", 3500);
+    return;
+  }
 
-      if (novaSenha !== confirmarSenha) {
-        showAlert("A nova senha e a confirmação não coincidem.");
-        return;
-      }
+  const requestBody = {
+    old_password: senhaAtual,
+    new_password: novaSenha
+  };
 
-    }
+  toggleLoading(true);
 
-    // Apagar conta - abrir modal
-    function abrirModalExcluir() {
-      document.getElementById("modalExcluir").classList.remove("hidden");
-    }
+  const response = await requestToServer(`/customer/update-password/with-old/${user.id}`,"PUT",JSON.stringify(requestBody),user.jwt_token);
 
-    // Fechar modal
-    function fecharModalExcluir() {
-      document.getElementById("modalExcluir").classList.add("hidden");
-    }
+  if (response?.error) {
+    showAlertCard('danger',response.error, 'Erro ao alterar senha.', 3500);
+  } else {
+    showAlertCard("success","Senha alterada com sucesso!", 'Sua nova senha já está disponível.', 3500);
+    document.getElementById('senhaAtual').value = '';
+    document.getElementById('novaSenha').value = '';
+    document.getElementById('confirmarSenha').value = '';
+  }
 
-    // Confirmar exclusão
-    function confirmarExclusao() {
-      localStorage.removeItem("perfil");
-      showAlert("Conta excluída com sucesso.");
-      window.location.href = "index"; // ou a página inicial
-    }
+  toggleLoading(false);
+}
+
+// Apagar conta - abrir modal
+function abrirModalExcluir() {
+  document.getElementById("modalExcluir").classList.remove("hidden");
+}
+
+// Fechar modal
+function fecharModalExcluir() {
+  document.getElementById("modalExcluir").classList.add("hidden");
+}
+
+// Confirmar exclusão
+async function confirmarExclusao() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user || !user.token) {
+    showAlertCard("danger", "Usuário não autenticado.", "Por favor, faça login novamente.", 3500);
+    return;
+  }
+
+  toggleLoading(true);
+
+  const response = await requestToServer(
+    `/customer/delete/${user.id}`, "DELETE", null, user.jwt_token // Certifique-se que user.token é o JWT Bearer
+  );
+
+  if (response?.error) {
+    showAlertCard("danger", response.error, "Erro ao excluir conta.", 3500);
+  } else {
+    localStorage.removeItem("user");
+    window.location.href = "login?deletedAccount=SUCCESS_ACCOUNT_DELETED";
+  }
+
+  toggleLoading(false);
+}

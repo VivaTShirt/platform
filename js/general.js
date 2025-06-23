@@ -1,5 +1,5 @@
 //SERVER  
-const API_URL = "https://c74a-152-243-252-149.ngrok-free.app/v1";
+const API_URL = "https://7ef9-152-243-252-149.ngrok-free.app/v1";
 
 // usuparii fica salvo em "user" no localStorage
 

@@ -4,20 +4,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configurações da Conta - VivaTshirt</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            roxo: '#9875B7',
-            lilas: '#CEB8DF',
-          }
-        }
-      }
-    }
-  </script>
 
-<body class="bg-lilas min-h-screen flex flex-col font-sans">
+<body class="min-h-screen flex flex-col font-sans">
 
   <!-- HEADER -->
   <header class="w-full h-[80px] bg-[#B78BC8] flex items-center justify-center">
@@ -27,48 +15,46 @@
   <!-- CONTEÚDO PRINCIPAL -->
   <main class="flex-1 flex items-center justify-center p-6">
 
-    <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
+    <div class="w-full max-w-md">
       <div class="mb-6">
-        <button onclick="window.location.href='perfil'" class="flex items-center text-roxo hover:text-purple-800 transition text-sm font-medium">
+        <button onclick="window.location.href='perfil'" class="flex items-center text-black hover:text-purple-800 transition text-sm font-medium">
           <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
           </svg>
           Voltar para o perfil
         </button>
       </div>
-      <h2 class="text-xl font-semibold text-roxo mb-6 text-center">Alterar Senha</h2>
+      <h2 class="text-xl font-semibold text-black mb-6 text-center">Alterar Senha</h2>
 
       <!-- Alterar senha -->
       <div class="space-y-4">
         <div>
-          <label class="block text-roxo font-medium mb-1">Senha Atual:</label>
-          <input type="password" id="senhaAtual" class="w-full border border-roxo rounded-md p-2" placeholder="Senha atual">
+          <label class="block text-black font-medium mb-1">Senha Atual:</label>
+          <input type="password" id="senhaAtual" class="w-full border border-black rounded-md p-2" placeholder="Senha atual">
         </div>
         <div>
-          <label class="block text-roxo font-medium mb-1">Nova Senha:</label>
-          <input type="password" id="novaSenha" class="w-full border border-roxo rounded-md p-2" placeholder="Nova senha">
+          <label class="block text-black font-medium mb-1">Nova Senha:</label>
+          <input type="password" id="novaSenha" class="w-full border border-black rounded-md p-2" placeholder="Nova senha">
         </div>
         <div>
-          <label class="block text-roxo font-medium mb-1">Confirmar Nova Senha:</label>
-          <input type="password" id="confirmarSenha" class="w-full border border-roxo rounded-md p-2" placeholder="Confirme a nova senha">
+          <label class="block text-black font-medium mb-1">Confirmar Nova Senha:</label>
+          <input type="password" id="confirmarSenha" class="w-full border border-black rounded-md p-2" placeholder="Confirme a nova senha">
         </div>
-        <button onclick="alterarSenha()" class="w-full bg-roxo text-white py-2 rounded-full hover:bg-purple-800 transition">Salvar Alterações</button>
+        <button onclick="alterarSenha()" class="w-full bg-purple-300 text-white py-2 rounded-full hover:bg-purple-800 transition">Salvar Alterações</button>
       </div>
 
       <!-- Apagar conta -->
       <div class="mt-8 text-center">
         <button onclick="abrirModalExcluir()" class="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-700 transition">Apagar Conta</button>
       </div>
-      <div class="mt-4 text-center">
-        <a href="esqueci-a-senha" class="text-roxo underline hover:text-purple-800 transition text-sm">Esqueci minha senha</a>
-      </div>
+
     </div>
   </main>
 
   <!-- Modal de confirmação de exclusão -->
   <div id="modalExcluir" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div class="bg-white rounded-xl p-6 w-80 text-center">
-      <h3 class="text-roxo text-xl font-bold mb-4">Deseja mesmo excluir a conta?</h3>
+      <h3 class="text-black text-xl font-bold mb-4">Deseja mesmo excluir a conta?</h3>
       <div class="flex justify-center space-x-4">
         <button onclick="confirmarExclusao()" class="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-700 transition">Sim</button>
         <button onclick="fecharModalExcluir()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-400 transition">Não</button>
@@ -76,36 +62,39 @@
     </div>
   </div>
   
+  <!-- FOOTER -->
+  <footer class="bg-[#0b090d] text-white py-8 mt-5">
+    <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+      <!-- Nome da empresa -->
+      <div>
+        <h3 class="text-[#9875b7] text-2xl font-bold">VivaTshirt</h3>
+      </div>
+      <!-- Navegação simples -->
+      <ul class="flex flex-col md:flex-row gap-4 text-[#ceb8df] text-sm">
+        <li><a href="#" class="hover:text-[#9875b7] transition-colors">FAQ</a></li>
+        <li><a href="#" class="hover:text-[#9875b7] transition-colors">Contato</a></li>
+        <li><a href="#" class="hover:text-[#9875b7] transition-colors">Sobre</a></li>
+      </ul>
+      <!-- Redes sociais -->
+      <div class="flex space-x-4">
+        <a href="#" aria-label="Facebook" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+          <img src="image/Facebook.svg" alt="Facebook" class="w-6 h-6">
+        </a>
+        <a href="#" aria-label="Instagram" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+          <img src="image/Instagram.svg" alt="Instagram" class="w-6 h-6">
+        </a>
+        <a href="#" aria-label="WhatsApp" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
+          <img src="image/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6">
+        </a>
+      </div>
+    </div>
+    <div class="mt-6 text-center text-[#ceb8df] text-xs">
+      &copy; <span id="current-year"></span> VivaTshirt. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script src="js/general.js"></script>
+  <script src="js/configuracoes.js"></script>
+
 </body>
 </html>
-
-<!-- FOOTER -->
-    <footer class="bg-[#0b090d] text-white py-8 mt-5">
-      <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-        <!-- Nome da empresa -->
-        <div>
-          <h3 class="text-[#9875b7] text-2xl font-bold">VivaTshirt</h3>
-        </div>
-        <!-- Navegação simples -->
-        <ul class="flex flex-col md:flex-row gap-4 text-[#ceb8df] text-sm">
-          <li><a href="#" class="hover:text-[#9875b7] transition-colors">FAQ</a></li>
-          <li><a href="#" class="hover:text-[#9875b7] transition-colors">Contato</a></li>
-          <li><a href="#" class="hover:text-[#9875b7] transition-colors">Sobre</a></li>
-        </ul>
-        <!-- Redes sociais -->
-        <div class="flex space-x-4">
-          <a href="#" aria-label="Facebook" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
-            <img src="image/Facebook.svg" alt="Facebook" class="w-6 h-6">
-          </a>
-          <a href="#" aria-label="Instagram" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
-            <img src="image/Instagram.svg" alt="Instagram" class="w-6 h-6">
-          </a>
-          <a href="#" aria-label="WhatsApp" class="text-[#ceb8df] hover:text-[#9875b7] transition-colors">
-            <img src="image/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6">
-          </a>
-        </div>
-      </div>
-      <div class="mt-6 text-center text-[#ceb8df] text-xs">
-        &copy; <span id="current-year"></span> VivaTshirt. Todos os direitos reservados.
-      </div>
-    </footer>
